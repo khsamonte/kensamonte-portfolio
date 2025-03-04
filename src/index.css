@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* Add this to your CSS file */
+.parallax-container {
+  height: auto !important;
+  min-height: 100vh;
+}
+
+.parallax-container > div {
+  height: auto !important;
+  min-height: 100vh;
+}

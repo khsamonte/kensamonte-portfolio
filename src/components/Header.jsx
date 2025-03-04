@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll } from "framer-motion";
+import { Parallax } from "react-parallax";
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
@@ -110,92 +111,100 @@ const Header = () => {
       </nav>
 
       {/* Hero Section with Background Image */}
-      <section
-        id="home"
-        className="pt-24 pb-16 min-h-screen flex items-center relative"
-        style={{
-          backgroundImage: "url('/images/bg2.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center 30%",
-          backgroundAttachment: "fixed",
+      <Parallax
+        blur={0}
+        bgImage="/images/bg2.jpg"
+        bgImageAlt="Background"
+        strength={300}
+        bgImageStyle={{
+          objectFit: "cover",
+          objectPosition: "center 30%",
+          width: "100%",
+          height: "100%",
         }}
+        className="parallax-container"
       >
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-slate-900/70"></div>
+        <section
+          id="home"
+          className="pt-24 pb-16 min-h-screen flex items-center relative"
+        >
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-slate-900/70"></div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            {/* Profile Image */}
-            <motion.div
-              className="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <img
-                src="/images/ken2.jpg"
-                alt="Profile"
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src =
-                    "https://via.placeholder.com/400x400.png?text=Your+Photo";
-                }}
-              />
-            </motion.div>
-
-            {/* Hero Content */}
-            <div className="text-center md:text-left">
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              {/* Profile Image */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                className="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
               >
-                <h2 className="text-4xl md:text-5xl font-bold text-white">
-                  Ken Samonte
-                </h2>
-                <h3 className="text-xl md:text-2xl text-blue-400 mt-2">
-                  Front-End Developer
-                </h3>
+                <img
+                  src="/images/ken2.jpg"
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src =
+                      "https://via.placeholder.com/400x400.png?text=Your+Photo";
+                  }}
+                />
               </motion.div>
 
-              <motion.p
-                className="text-slate-300 mt-4 max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                Front-end developer with 10 years of experience building
-                websites and applications, including 5 years of experience in a
-                product development environment. Specializing in interactive
-                experiences and data visualization. Currently preparing for the
-                JLPT N3 in Japanese.
-              </motion.p>
-
-              <motion.div
-                className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <button
-                  onClick={() => scrollToSection("projects")}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition shadow-md cursor-pointer"
+              {/* Hero Content */}
+              <div className="text-center md:text-left">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                  View Projects
-                </button>
+                  <h2 className="text-4xl md:text-5xl font-bold text-white">
+                    Ken Samonte
+                  </h2>
+                  <h3 className="text-xl md:text-2xl text-blue-400 mt-2">
+                    Front-End Developer
+                  </h3>
+                </motion.div>
 
-                <button
-                  onClick={() => scrollToSection("contact")}
-                  className="px-6 py-3 bg-transparent border-2 border-blue-400 text-blue-400 rounded-lg font-medium hover:bg-blue-900/20 transition shadow-md cursor-pointer"
+                <motion.p
+                  className="text-slate-300 mt-4 max-w-2xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
                 >
-                  Contact Me
-                </button>
-              </motion.div>
+                  Front-end developer with 10 years of experience building
+                  websites and applications, including 5 years of experience in
+                  a product development environment. Specializing in interactive
+                  experiences and data visualization. Currently preparing for
+                  the JLPT N3 in Japanese.
+                </motion.p>
+
+                <motion.div
+                  className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <button
+                    onClick={() => scrollToSection("projects")}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition shadow-md cursor-pointer"
+                  >
+                    View Projects
+                  </button>
+
+                  <button
+                    onClick={() => scrollToSection("contact")}
+                    className="px-6 py-3 bg-transparent border-2 border-blue-400 text-blue-400 rounded-lg font-medium hover:bg-blue-900/20 transition shadow-md cursor-pointer"
+                  >
+                    Contact Me
+                  </button>
+                </motion.div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </Parallax>
     </>
   );
 };
