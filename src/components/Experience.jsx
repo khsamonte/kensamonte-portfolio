@@ -286,7 +286,7 @@ const ExperienceItem = ({
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -50 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.25 }}
     >
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-4">
         <h3 className="text-xl font-bold text-white">{company}</h3>
@@ -513,7 +513,12 @@ const Experience = () => {
 
             {/* Experience content */}
             <div className="relative h-full">
-              <AnimatePresence mode="wait" initial={false} custom={direction}>
+              <AnimatePresence
+                mode="wait"
+                initial={false}
+                custom={direction}
+                transition={{ duration: 0.25 }}
+              >
                 <ExperienceItem
                   key={activeIndex}
                   {...experiences[activeIndex]}
