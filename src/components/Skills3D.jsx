@@ -552,8 +552,8 @@ const Skills3D = () => {
           <ul className="space-y-3">
             {additionalSkills.map((skill, index) => (
               <li key={index} className="text-slate-300 flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
-                <span>{skill}</span>
+                <span className="text-blue-400 mr-2">❖</span>
+                <span className="text-xs sm:text-sm md:text-base">{skill}</span>
               </li>
             ))}
           </ul>

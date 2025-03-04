@@ -296,14 +296,16 @@ const ExperienceItem = ({
       </div>
 
       <div className="inline-block bg-blue-900/50 px-3 py-1 rounded-full mb-4">
-        <p className="text-blue-300">{position}</p>
+        <p className="text-sm md:text-base text-blue-300">{position}</p>
       </div>
 
       <ul className="space-y-2">
         {achievements.map((achievement, index) => (
           <li key={index} className="text-slate-300 flex items-start">
-            <span className="text-blue-400 mr-2">•</span>
-            <span>{achievement}</span>
+            <span className="text-blue-400 mr-2">❖</span>
+            <span className="text-xs sm:text-sm md:text-base">
+              {achievement}
+            </span>
           </li>
         ))}
       </ul>
