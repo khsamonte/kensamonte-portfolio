@@ -522,7 +522,7 @@ const Skills3D = () => {
 
         {/* Additional Skills */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 hidden sm:block"
+          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -553,7 +553,7 @@ const Skills3D = () => {
             {additionalSkills.map((skill, index) => (
               <li key={index} className="text-slate-300 flex items-start">
                 <span className="text-blue-400 mr-2">❖</span>
-                <span className="text-xs sm:text-sm md:text-base">{skill}</span>
+                <span className="text-sm md:text-base">{skill}</span>
               </li>
             ))}
           </ul>

@@ -303,9 +303,7 @@ const ExperienceItem = ({
         {achievements.map((achievement, index) => (
           <li key={index} className="text-slate-300 flex items-start">
             <span className="text-blue-400 mr-2">❖</span>
-            <span className="text-xs sm:text-sm md:text-base">
-              {achievement}
-            </span>
+            <span className="text-sm md:text-base">{achievement}</span>
           </li>
         ))}
       </ul>
