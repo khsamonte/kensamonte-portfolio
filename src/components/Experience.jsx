@@ -410,6 +410,11 @@ const Experience = () => {
         "Built an interactive real-time match momentum graph widget, visually depicting key match events.",
         "Created a large design system for 100+ components, ensuring consistent UI/UX across multiple products.",
         "Optimized front-end code performance, reducing Safari CPU usage by ~40%.",
+        "Developed the front end of the company website.",
+        "Wrote a jersey generator tool to produce 1000+ dynamic jersey icons for various sports teams.",
+        "Created 2D animations in After Effects and deployed them in web projects using LottieFiles.",
+        "Wrote a Figma plugin automating multi-language full-page translations, enhancing team productivity.",
+        "Prototyped a 2D football game simulation using C# and Unity3D.",
       ],
       isActive: true,
     },
@@ -478,11 +483,10 @@ const Experience = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-3">
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
             <h3 className="text-xl font-bold text-white">Work History</h3>
-
             {/* Company tabs for easy navigation */}
-            <div className="hidden md:flex space-x-2">
+            <div className="flex flex-wrap gap-2">
               {experiences.map((exp, index) => (
                 <button
                   key={index}
@@ -490,7 +494,7 @@ const Experience = () => {
                     setDirection(index > activeIndex ? 1 : -1);
                     setActiveIndex(index);
                   }}
-                  className={`px-4 py-2 rounded-lg transition-colors cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg transition-colors cursor-pointer text-sm ${
                     index === activeIndex
                       ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"

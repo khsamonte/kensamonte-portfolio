@@ -77,7 +77,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          <div className="hidden">
             <button className="text-slate-300 hover:text-blue-400">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

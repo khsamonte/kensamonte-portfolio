@@ -472,7 +472,10 @@ const Skills3D = () => {
             </div>
           </div>
         </div>
-        <div ref={mountRef} className="w-full h-[750px] rounded-lg" />
+        <div
+          ref={mountRef}
+          className="w-full h-[500px] sm:h-[750px] rounded-lg"
+        />
       </motion.div>
 
       {/* Two-column layout for Languages and Additional Skills on wider screens */}
@@ -519,7 +522,7 @@ const Skills3D = () => {
 
         {/* Additional Skills */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700 hidden sm:block"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
