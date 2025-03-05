@@ -9,31 +9,31 @@ const EASTER_EGGS = {
     id: "konami_code",
     name: "Konami Code",
     description: "You unlocked developer mode by entering the Konami Code!",
-    hint: `A famous cheat code from the 80s that starts with "up, up, down, down..."`,
+    hint: `A legendary cheat code from the 80s that starts with a double ascent, followed by a descent...`,
   },
   TERMINAL: {
     id: "terminal",
     name: "Terminal Access",
     description: "You found the hidden terminal!",
-    hint: "Press the key above Tab and below Esc to reveal a developer's best friend.",
+    hint: "Between 'Tab' and 'Esc' lies the gateway to a developer’s world.",
   },
   LOGO_CLICKS: {
     id: "logo_clicks",
     name: "Curious Clicker",
     description: "You found the secret by clicking the logo multiple times!",
-    hint: "The name at the top might reward those who click more than once or twice.",
+    hint: "A familiar name at the top might reward those who touch it more than once or twice.",
   },
   MATRIX: {
     id: "matrix",
     name: "The Matrix",
     description: "You entered the Matrix!",
-    hint: "This Keanu Reeves movie involves a digital world. Type its name in the terminal.",
+    hint: "This 2000s movie involves hackers in a digital world. Type its title to step into a virtual illusion.",
   },
   SURPRISE: {
     id: "surprise",
     name: "Surprise Party",
     description: "You triggered the surprise animation!",
-    hint: "Birthdays have these, and so do parties. Try typing one of these words in the terminal.",
+    hint: "Birthdays have these, and so do parties. This word holds the key.",
   },
 };
 

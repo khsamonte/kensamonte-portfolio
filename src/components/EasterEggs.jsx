@@ -262,7 +262,7 @@ const EasterEggs = () => {
         setTimeout(() => {
           cancelAnimationFrame(animationId);
           document.body.removeChild(container);
-        }, 10000);
+        }, 5000);
       };
 
       createMatrixRain();
@@ -330,7 +330,7 @@ const EasterEggs = () => {
       <Terminal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
 
       {/* Hint for Terminal (shows briefly on page load) */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {!terminalOpen && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -342,7 +342,7 @@ const EasterEggs = () => {
             Press ` to open terminal
           </motion.div>
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </>
   );
 };

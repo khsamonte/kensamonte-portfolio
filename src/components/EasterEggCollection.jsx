@@ -142,7 +142,7 @@ const EasterEggCollection = () => {
                 </h2>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-slate-300 hover:text-white"
+                  className="text-slate-300 hover:text-white cursor-pointer"
                 >
                   ×
                 </button>
@@ -157,7 +157,8 @@ const EasterEggCollection = () => {
                       Easter eggs.
                     </h3>
                     <p className="text-slate-400 text-sm mt-1">
-                      Explore the whole webpage to find them all. ;)
+                      Hi! Let's play a little game. Explore the whole webpage to
+                      find the Easter eggs. 😉
                     </p>
                   </div>
 
