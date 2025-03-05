@@ -3,6 +3,9 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { motion } from "framer-motion";
 
+// const THREE = lazy(() => import("three"));
+// const OrbitControls = lazy(() => import("three/examples/jsm/controls/OrbitControls"))
+
 // Original LanguageCard component from your code
 const LanguageCard = ({ language, level, certification = null }) => {
   let proficiencyWidth;
@@ -57,7 +60,7 @@ const LanguageCard = ({ language, level, certification = null }) => {
   );
 };
 
-const Skills3D = () => {
+const Skills = () => {
   const mountRef = useRef(null);
 
   // Define additional skills from original component
@@ -572,4 +575,4 @@ const Skills3D = () => {
   );
 };
 
-export default Skills3D;
+export default Skills;

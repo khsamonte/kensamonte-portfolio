@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-import { hexToRgba } from "../utils/visualizations/HexToRGBA";
 import { drawCryptoPriceVisualization } from "../utils/visualizations/CryptoPriceVisualization";
 import { drawSoccerMatchVisualization } from "../utils/visualizations/SoccerMatchVisualization";
 import { drawContentCenterVisualization } from "../utils/visualizations/ContentCenterVisualization";
@@ -15,7 +14,7 @@ const ProjectShowcase = ({
   description,
   technologies = [],
   companyName,
-  projectType, // 'crypto', 'front-end', 'matchtracker', 'design'
+  projectType, // 'crypto', 'frontend', 'matchtracker', 'design'
   accentColor = "#60a5fa", // default blue
   secondaryColor = "#1e40af", // default dark blue
 }) => {

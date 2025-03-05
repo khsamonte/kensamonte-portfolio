@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const form = useRef();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,9 +33,13 @@ const Contact = () => {
     });
 
     try {
-      // This would normally be an API call to your backend or a service like Formspree
-      // For now, we'll simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Replace with your actual EmailJS service ID, template ID, and public key
+      await emailjs.sendForm(
+        "service_jb6c6jm",
+        "template_03w6toc",
+        form.current,
+        "YfwRbA59kdTP9_-BC"
+      );
 
       setStatus({
         submitted: true,
@@ -48,6 +54,7 @@ const Contact = () => {
         message: "",
       });
     } catch (error) {
+      console.error("Email submission error:", error);
       setStatus({
         submitted: false,
         submitting: false,
@@ -149,7 +156,6 @@ const Contact = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Contact Form */}
         <motion.div
-          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
           className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -162,7 +168,7 @@ const Contact = () => {
 
           <h3 className="text-xl font-bold text-white mb-4">Send a Message</h3>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form ref={form} onSubmit={handleSubmit} className="space-y-4">
             <div>
               <input
                 type="text"
@@ -247,7 +253,6 @@ const Contact = () => {
 
         {/* Contact Information */}
         <motion.div
-          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
           className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -300,15 +305,6 @@ const Contact = () => {
             <p className="text-slate-300">
               My typical response time is within 24 hours.
             </p>
-
-            {/* <div className="mt-6">
-              <h4 className="text-sm font-medium text-slate-400 mb-2">
-                Preferred Working Hours
-              </h4>
-              <p className="text-white">
-                Monday to Friday: 9:00 AM - 6:00 PM (PHT / GMT+8)
-              </p>
-            </div> */}
           </div>
         </motion.div>
       </div>

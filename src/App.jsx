@@ -1,18 +1,36 @@
+import React, { Suspense, lazy } from "react";
 import Header from "./components/Header";
-import Projects from "./components/Projects";
-import Experience from "./components/Experience";
-import Skills3D from "./components/Skills3D";
-import Contact from "./components/Contact";
+
+// Lazy load components
+const Projects = lazy(() => import("./components/Projects"));
+const Experience = lazy(() => import("./components/Experience"));
+const Skills = lazy(() => import("./components/Skills"));
+const Contact = lazy(() => import("./components/Contact"));
+
+// Loading component
+const LoadingFallback = () => (
+  <div className="flex justify-center items-center py-16">
+    <div className="animate-pulse text-blue-300">Loading...</div>
+  </div>
+);
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <Projects />
-        <Skills3D />
-        <Experience />
-        <Contact />
+        <Suspense fallback={<LoadingFallback />}>
+          <Projects />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <Skills />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <Experience />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
+          <Contact />
+        </Suspense>
       </main>
     </div>
   );
