@@ -425,7 +425,7 @@ const Skills3D = () => {
         </h2>
         <p className="text-slate-400 max-w-3xl mb-6">
           A diverse set of technical skills developed over 10 years of
-          professional experience, with expertise in frontend development,
+          professional experience, with expertise in front-end development,
           interactive visualization, and creative tools.
         </p>
       </motion.div>
@@ -480,14 +480,18 @@ const Skills3D = () => {
 
       {/* Two-column layout for Languages and Additional Skills on wider screens */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        {/* Languages - Modified to be one column on wider screens */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
+
           <div className="flex items-center mb-6">
             <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
               <svg
@@ -522,12 +526,17 @@ const Skills3D = () => {
 
         {/* Additional Skills */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
+
           <div className="flex items-center mb-6">
             <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
               <svg

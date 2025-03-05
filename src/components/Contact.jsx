@@ -78,8 +78,8 @@ const Contact = () => {
         </svg>
       ),
       label: "Email",
-      value: "khsamonte@gmail.com",
-      link: "mailto:khsamonte@gmail.com",
+      value: "ken@kensamonte.com",
+      link: "mailto:ken@kensamonte.com",
     },
     {
       icon: (
@@ -149,12 +149,17 @@ const Contact = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* Contact Form */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
+
           <h3 className="text-xl font-bold text-white mb-4">Send a Message</h3>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -242,12 +247,17 @@ const Contact = () => {
 
         {/* Contact Information */}
         <motion.div
-          className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
+          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
+
           <h3 className="text-xl font-bold text-white mb-6">
             Contact Information
           </h3>
@@ -309,7 +319,8 @@ const Contact = () => {
           © {new Date().getFullYear()} Ken Samonte. All rights reserved.
         </p>
         <p className="text-sm text-slate-500 mt-2">
-          Built with React and Vite.
+          Built with React and Vite. All images and creative works on this site
+          belong to Ken Samonte.
         </p>
       </div>
     </section>

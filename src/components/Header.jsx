@@ -163,7 +163,7 @@ const Header = () => {
                     Ken Samonte
                   </h2>
                   <h3 className="text-xl md:text-2xl text-blue-400 mt-2">
-                    Front-End Developer
+                    Front-end Developer
                   </h3>
                 </motion.div>
 
@@ -175,9 +175,8 @@ const Header = () => {
                 >
                   Front-end developer with 10 years of experience building
                   websites and applications, including 5 years of experience in
-                  a product development environment. Specializing in interactive
-                  experiences and data visualization. Currently preparing for
-                  the JLPT N3 in Japanese.
+                  a product development environment. Currently preparing for the
+                  JLPT N3 in Japanese.
                 </motion.p>
 
                 <motion.div

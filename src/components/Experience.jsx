@@ -56,7 +56,7 @@ const ExperienceCanvas = ({ companyIndex }) => {
 
     // Company-specific patterns
     const patterns = [
-      // PH Creative - Data visualization theme
+      // CSP Creative Inc. - Data visualization theme
       () => {
         // Graph-like pattern with animated dots
         const dotCount = 50;
@@ -363,11 +363,11 @@ const Education = () => {
             </div>
             <ul className="mt-3 text-slate-300 space-y-2">
               <li className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-blue-400 mr-2">❖</span>
                 <span>Best in Student Research (Gold)</span>
               </li>
               <li className="flex items-start">
-                <span className="text-blue-400 mr-2">•</span>
+                <span className="text-blue-400 mr-2">❖</span>
                 <span>Dean's Lister</span>
               </li>
             </ul>
@@ -399,8 +399,8 @@ const Education = () => {
 const Experience = () => {
   const experiences = [
     {
-      company: "PH Creative",
-      position: "Frontend Developer",
+      company: "CSP Creative Inc.",
+      position: "Front-end Developer",
       period: "June 2019 - February 2025",
       location: "Makati City, Philippines",
       achievements: [
@@ -410,7 +410,7 @@ const Experience = () => {
         "Built an interactive real-time match momentum graph widget, visually depicting key match events.",
         "Created a large design system for 100+ components, ensuring consistent UI/UX across multiple products.",
         "Optimized front-end code performance, reducing Safari CPU usage by ~40%.",
-        "Developed the front end of the company website.",
+        "Developed the front-end of the company website.",
         "Wrote a jersey generator tool to produce 1000+ dynamic jersey icons for various sports teams.",
         "Created 2D animations in After Effects and deployed them in web projects using LottieFiles.",
         "Wrote a Figma plugin automating multi-language full-page translations, enhancing team productivity.",
@@ -472,7 +472,7 @@ const Experience = () => {
           Professional Experience
         </h2>
         <p className="text-slate-400 max-w-3xl">
-          Over 10 years of frontend development experience across various
+          Over 10 years of front-end development experience across various
           industries, with a focus on interactive data visualization and user
           experience.
         </p>
