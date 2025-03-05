@@ -1,5 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import Header from "./components/Header";
+import EasterEggs from "./components/EasterEggs";
+import EasterEggCollection from "./components/EasterEggCollection";
 
 // Lazy load components
 const Projects = lazy(() => import("./components/Projects"));
@@ -17,6 +19,8 @@ const LoadingFallback = () => (
 function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-white">
+      <EasterEggs />
+      <EasterEggCollection />
       <Header />
       <main className="container mx-auto px-4 py-8">
         <Suspense fallback={<LoadingFallback />}>

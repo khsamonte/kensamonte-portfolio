@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Add this to your CSS file */
+/* Parallax */
 .parallax-container {
   height: auto !important;
   min-height: 100vh;

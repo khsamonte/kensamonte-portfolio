@@ -51,10 +51,13 @@ const Header = () => {
       <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-slate-800">
         <div className="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
           <motion.h1
-            className="text-xl font-bold text-blue-400"
+            className="text-xl font-bold text-blue-400 cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
+            onClick={() => {
+              window.dispatchEvent(new CustomEvent("logo-clicked"));
+            }}
           >
             Ken Samonte
           </motion.h1>
