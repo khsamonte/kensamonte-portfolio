@@ -488,7 +488,7 @@ const Experience = () => {
             {/* Company tabs for easy navigation */}
             <div className="flex flex-wrap gap-2">
               {experiences.map((exp, index) => (
-                <button
+                <motion.button
                   key={index}
                   onClick={() => {
                     setDirection(index > activeIndex ? 1 : -1);
@@ -499,9 +499,18 @@ const Experience = () => {
                       ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
                       : "text-slate-400 hover:text-slate-200 hover:bg-slate-700/50"
                   }`}
+                  whileHover={{
+                    y: -2,
+                    backgroundColor:
+                      index === activeIndex
+                        ? "rgba(59, 130, 246, 0.3)"
+                        : "rgba(100, 116, 139, 0.3)",
+                  }}
+                  whileTap={{ y: 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
                   {exp.company}
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>

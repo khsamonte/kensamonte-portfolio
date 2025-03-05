@@ -449,30 +449,70 @@ const Skills = () => {
         {/* Legend for category colors */}
         <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <div className="flex items-center">
-              <div className="w-4 h-4 rounded-full bg-red-500 mr-2"></div>
+            <motion.div
+              className="flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-red-500 mr-2"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              ></motion.div>
               <span className="text-slate-300 text-sm">
                 Programming Languages
               </span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 rounded-full bg-green-500 mr-2"></div>
+            </motion.div>
+            <motion.div
+              className="flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-green-500 mr-2"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              ></motion.div>
               <span className="text-slate-300 text-sm">Web Technologies</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 rounded-full bg-blue-500 mr-2"></div>
+            </motion.div>
+            <motion.div
+              className="flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-purple-500 mr-2"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              ></motion.div>
               <span className="text-slate-300 text-sm">
                 Frameworks & Libraries
               </span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 rounded-full bg-yellow-300 mr-2"></div>
+            </motion.div>
+            <motion.div
+              className="flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-yellow-300 mr-2"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              ></motion.div>
               <span className="text-slate-300 text-sm">Development Tools</span>
-            </div>
-            <div className="flex items-center">
-              <div className="w-4 h-4 rounded-full bg-pink-400 mr-2"></div>
+            </motion.div>
+            <motion.div
+              className="flex items-center"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <motion.div
+                className="w-4 h-4 rounded-full bg-pink-400 mr-2"
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 10 }}
+              ></motion.div>
               <span className="text-slate-300 text-sm">Design Tools</span>
-            </div>
+            </motion.div>
           </div>
         </div>
         <div

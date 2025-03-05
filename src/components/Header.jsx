@@ -71,6 +71,7 @@ const Header = () => {
                 onClick={() => scrollToSection(item.id)}
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 {item.label}
               </motion.button>
@@ -183,21 +184,30 @@ const Header = () => {
                   className="mt-6 flex flex-wrap gap-4 justify-center md:justify-start"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <button
+                  <motion.button
                     onClick={() => scrollToSection("projects")}
                     className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition shadow-md cursor-pointer"
+                    whileHover={{
+                      scale: 1.05,
+                      boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.5)",
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     View Projects
-                  </button>
+                  </motion.button>
 
-                  <button
+                  <motion.button
                     onClick={() => scrollToSection("contact")}
                     className="px-6 py-3 bg-transparent border-2 border-blue-400 text-blue-400 rounded-lg font-medium hover:bg-blue-900/20 transition shadow-md cursor-pointer"
+                    whileHover={{ scale: 1.05, borderColor: "#60a5fa" }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     Contact Me
-                  </button>
+                  </motion.button>
                 </motion.div>
               </div>
             </div>

@@ -170,53 +170,46 @@ const Contact = () => {
 
           <form ref={form} onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <input
-                type="text"
+              <AnimatedInput
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 placeholder="Name"
               />
             </div>
 
             <div>
-              <input
-                type="email"
+              <AnimatedInput
                 id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 placeholder="Email"
               />
             </div>
 
             <div>
-              <input
-                type="text"
+              <AnimatedInput
                 id="subject"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
                 placeholder="Subject"
               />
             </div>
 
             <div>
-              <textarea
+              <AnimatedInput
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 required
                 rows={5}
-                className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
                 placeholder="Your message..."
               />
             </div>
@@ -229,8 +222,14 @@ const Contact = () => {
                   : "bg-blue-600 hover:bg-blue-700 text-white"
               }`}
               disabled={status.submitting}
-              whileHover={{ scale: status.submitting ? 1 : 1.03 }}
+              whileHover={{
+                scale: status.submitting ? 1 : 1.03,
+                boxShadow: status.submitting
+                  ? "none"
+                  : "0 4px 15px rgba(59, 130, 246, 0.4)",
+              }}
               whileTap={{ scale: status.submitting ? 1 : 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {status.submitting ? "Sending..." : "Send Message"}
             </motion.button>
@@ -269,10 +268,23 @@ const Contact = () => {
 
           <div className="space-y-6">
             {contactInfo.map((item, index) => (
-              <div key={index} className="flex items-start">
-                <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400">
+              <motion.div
+                key={index}
+                className="flex items-start"
+                whileHover={{ x: 5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <motion.div
+                  className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-900/50 flex items-center justify-center text-blue-400"
+                  whileHover={{
+                    backgroundColor: "rgba(59, 130, 246, 0.3)",
+                    scale: 1.1,
+                    rotate: 5,
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                >
                   {item.icon}
-                </div>
+                </motion.div>
                 <div className="ml-4">
                   <h4 className="text-sm font-medium text-slate-400">
                     {item.label}
@@ -280,7 +292,7 @@ const Contact = () => {
                   {item.link ? (
                     <a
                       href={item.link}
-                      className="text-lg text-blue-400 hover:text-blue-300 transition"
+                      className="text-md text-blue-400 hover:text-blue-300 transition"
                       target={
                         item.link.startsWith("http") ? "_blank" : undefined
                       }
@@ -293,16 +305,16 @@ const Contact = () => {
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-lg text-white">{item.value}</p>
+                    <p className="text-md text-white">{item.value}</p>
                   )}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           <div className="mt-8">
             <h3 className="text-xl font-bold text-white mb-4">Availability</h3>
-            <p className="text-slate-300">
+            <p className="text-md text-slate-300">
               My typical response time is within 24 hours.
             </p>
           </div>
@@ -320,6 +332,49 @@ const Contact = () => {
         </p>
       </div>
     </section>
+  );
+};
+
+const AnimatedInput = ({
+  type = "text",
+  id,
+  name,
+  value,
+  onChange,
+  required,
+  placeholder,
+  rows,
+}) => {
+  return (
+    <motion.div
+      whileHover={{ scale: 1.01 }}
+      whileFocus={{ scale: 1.01 }}
+      transition={{ duration: 0.2 }}
+    >
+      {rows ? (
+        <textarea
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          required={required}
+          rows={rows}
+          className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none"
+          placeholder={placeholder}
+        />
+      ) : (
+        <input
+          type={type}
+          id={id}
+          name={name}
+          value={value}
+          onChange={onChange}
+          required={required}
+          className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+          placeholder={placeholder}
+        />
+      )}
+    </motion.div>
   );
 };
 

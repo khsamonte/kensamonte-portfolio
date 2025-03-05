@@ -8,6 +8,7 @@ import { drawParkingVisualization } from "../utils/visualizations/ParkingLotVisu
 import { drawDesignSystemVisualization } from "../utils/visualizations/DesignSystemVisualization";
 import { drawPortfolioVisualization } from "../utils/visualizations/PortfolioVisualization";
 import { drawDefaultVisualization } from "../utils/visualizations/Visualizations";
+import { hexToRgba } from "../utils/visualizations/HexToRGBA";
 
 const ProjectShowcase = ({
   title,
@@ -193,6 +194,12 @@ const ProjectShowcase = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
+      whileHover={{
+        y: -8,
+        boxShadow:
+          "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.3)",
+        borderColor: "#60a5fa",
+      }}
     >
       {/* Abstract Visualization */}
       <div className="relative overflow-hidden bg-slate-900 aspect-video">
@@ -223,12 +230,18 @@ const ProjectShowcase = ({
             </h4>
             <div className="flex flex-wrap gap-2">
               {technologies.map((tech) => (
-                <span
+                <motion.span
                   key={tech}
                   className="px-2 py-1 bg-slate-700 rounded text-xs text-slate-300"
+                  whileHover={{
+                    backgroundColor: hexToRgba(accentColor, 0.2),
+                    color: accentColor,
+                    scale: 1.05,
+                  }}
+                  transition={{ duration: 0.2 }}
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </div>
           </div>
