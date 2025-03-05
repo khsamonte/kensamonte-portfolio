@@ -56,7 +56,7 @@ const ExperienceCanvas = ({ companyIndex }) => {
 
     // Company-specific patterns
     const patterns = [
-      // PHixel Creative - Data visualization theme
+      // PH Creative - Data visualization theme
       () => {
         // Graph-like pattern with animated dots
         const dotCount = 50;
@@ -399,7 +399,7 @@ const Education = () => {
 const Experience = () => {
   const experiences = [
     {
-      company: "PHixel Creative",
+      company: "PH Creative",
       position: "Frontend Developer",
       period: "June 2019 - February 2025",
       location: "Makati City, Philippines",

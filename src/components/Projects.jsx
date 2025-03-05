@@ -9,7 +9,7 @@ const Projects = () => {
       description:
         "A plug-and-play cryptocurrency price simulation chart widget using React, Highcharts, and WebSocket for real-time data visualization, supporting live Binance API integration.",
       technologies: ["React", "WebSocket", "Highcharts", "Binance API"],
-      companyName: "PHixel Creative",
+      companyName: "PH Creative",
       projectType: "crypto",
       accentColor: "#60a5fa", // blue-400
       secondaryColor: "#3b82f6", // blue-500
@@ -19,7 +19,7 @@ const Projects = () => {
       description:
         "A fully animated football match tracker, simulating real-world minute-per-minute events with weather effects, day and night cycles, and dynamic stadium animations.",
       technologies: ["JavaScript", "LottieFiles", "CSS Animations"],
-      companyName: "PHixel Creative",
+      companyName: "PH Creative",
       projectType: "matchtracker",
       accentColor: "#100e13", // violet-400
       secondaryColor: "#8b5cf6", // violet-500
@@ -29,7 +29,7 @@ const Projects = () => {
       description:
         "A sports content center that delivers live head-to-head stats, match timelines, player lineups, team momentum shifts, scoreboards, and tournament standings via animated widgets.",
       technologies: ["React", "styled-components", "Recharts"],
-      companyName: "PHixel Creative",
+      companyName: "PH Creative",
       projectType: "content-center", // Changed from "frontend" to "sports"
       // accentColor: "#34d399", // emerald-400
       // secondaryColor: "#10b981", // emerald-500
@@ -43,7 +43,7 @@ const Projects = () => {
       description:
         "A large design system that houses a library of 100+ components and widgets, ensuring consistent UI/UX across multiple products.",
       technologies: ["React", "styled-components", "Storybook", "Figma"],
-      companyName: "PHixel Creative",
+      companyName: "PH Creative",
       projectType: "design-system",
       accentColor: "#f472b6", // pink-400
       secondaryColor: "#ec4899", // pink-500
@@ -53,7 +53,7 @@ const Projects = () => {
     //   description:
     //     "Wrote a jersey generator tool to produce 1000+ dynamic jersey icons for various sports teams. Automated the creation process for consistent branding across platforms.",
     //   technologies: ["JavaScript", "SVG", "Canvas API"],
-    //   companyName: "PHixel Creative",
+    //   companyName: "PH Creative",
     //   projectType: "design",
     //   accentColor: "#38bdf8", // sky-400
     //   secondaryColor: "#0ea5e9", // sky-500
