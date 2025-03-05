@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -35,7 +35,7 @@ const Contact = () => {
     try {
       // Replace with your actual EmailJS service ID, template ID, and public key
       await emailjs.sendForm(
-        "service_jb6c6jm",
+        "service_wktkt7j",
         "template_03w6toc",
         form.current,
         "YfwRbA59kdTP9_-BC"
