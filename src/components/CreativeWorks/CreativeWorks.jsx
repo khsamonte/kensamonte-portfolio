@@ -192,7 +192,7 @@ const CreativeWorks = () => {
         transition={{ duration: 0.5 }}
         className="mb-8"
       >
-        <div className="flex items-center justify-center gap-4 mb-4">
+        <div className="flex items-center gap-4 mb-4">
           <div className="bg-amber-900/30 p-3 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -214,11 +214,11 @@ const CreativeWorks = () => {
           </h2>
         </div>
         {/* <p className="text-amber-100/80 max-w-3xl"> */}
-        <p className="text-amber-100/80 text-center m-auto max-w-5xl">
-          Beyond programming, music and writing have been a consistent outlet
-          for my creative expression. In the past years, I have published album
-          records and short stories. This is my creative corner, where you can
-          explore my oeuvre in a cozy, personal space.
+        <p className="text-amber-100/80 max-w-3xl">
+          Beyond coding, music and writing have been a consistent outlet for my
+          creative expression. In the past years, I have published album records
+          and short stories. This is my artist corner, where you can explore my
+          oeuvre in a cozy, personal space.
         </p>
       </motion.div>
 

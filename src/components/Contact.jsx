@@ -146,10 +146,28 @@ const Contact = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold mb-4 text-blue-300">Get In Touch</h2>
+        <div className="flex items-center gap-4 mb-4">
+          <div className="bg-blue-900/30 p-3 rounded-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8 text-blue-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-3xl font-bold text-blue-300">Get In Touch</h2>
+        </div>
         <p className="text-slate-400 max-w-3xl mb-12">
-          Feel free to reach out if you have a project in mind or just want to
-          connect.
+          Feel free to reach out to me if you have something in mind or just
+          want to connect! I don't bite.
         </p>
       </motion.div>
 
