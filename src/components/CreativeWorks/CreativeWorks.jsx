@@ -217,8 +217,8 @@ const CreativeWorks = () => {
         <p className="text-amber-100/80 max-w-3xl">
           Beyond coding, music and writing have been a consistent outlet for my
           creative expression. In the past years, I have published album records
-          and short stories. This is my artist corner, where you can explore my
-          oeuvre in a cozy, personal space.
+          and short stories. This is my artist's corner, where you can explore
+          my oeuvre in a cozy, personal space.
         </p>
       </motion.div>
 
