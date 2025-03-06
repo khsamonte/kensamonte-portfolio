@@ -10,7 +10,7 @@ const CreativeWorks = () => {
     {
       id: 1,
       title: "Strange Weather in Manila",
-      year: "2023",
+      year: "November 25, 2023",
       cover: "/images/albums/swim.jpg", // Replace with your album art
       color: "#8b5cf6", // Purple theme color
       trackPreview: "/audio/tangerine-dream.mp3", // Replace with actual audio file
@@ -29,7 +29,7 @@ const CreativeWorks = () => {
     {
       id: 2,
       title: "Serenata",
-      year: "2017",
+      year: "November 17, 2017",
       cover: "/images/albums/fmdd.jpg",
       color: "#ec4899", // Pink theme color
       trackPreview: "/audio/one-night.mp3",
@@ -46,7 +46,7 @@ const CreativeWorks = () => {
     {
       id: 3,
       title: "Izakaya Nights",
-      year: "2016",
+      year: "December 16, 2016",
       cover: "/images/albums/izakaya.jpg",
       color: "#3b82f6", // Blue theme color
       trackPreview: "/audio/inner-children.mp3",
