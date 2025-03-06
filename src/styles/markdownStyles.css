@@ -139,13 +139,15 @@
 }
 
 @media (max-width: 640px) {
-  .story-content p {
+  .story-content p,
+  .typewriter {
     font-size: 15px;
   }
 }
 
 @media (max-width: 480px) {
-  .story-content p {
+  .story-content p,
+  .typewriter {
     font-size: 14px;
   }
 }

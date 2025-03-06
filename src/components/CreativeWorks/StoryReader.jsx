@@ -52,7 +52,7 @@ const StoryReader = ({ story }) => {
         >
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-xl font-serif font-bold text-amber-900 mb-2">
+              <h2 className="text-l sm:text-xl font-serif font-bold text-amber-900 mb-2">
                 {story.title}
               </h2>
               <p className="text-amber-800/80 text-sm">{story.year}</p>
