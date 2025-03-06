@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 const StoryReader = ({ story }) => {
   const storyContainerRef = useRef(null);
@@ -11,18 +12,11 @@ const StoryReader = ({ story }) => {
     }
   }, [story.id]);
 
-  // Format story content with paragraphs
-  const formattedContent = story.content
-    .split("\n\n")
-    .map((paragraph, index) => (
-      <p key={index} className="mb-4">
-        {paragraph}
-      </p>
-    ));
-
   return (
-    <div className="bg-amber-900/30 backdrop-blur-sm rounded-lg p-6 border border-amber-800/50 h-full">
-      <h3 className="text-xl font-serif text-amber-200 mb-4">Reading Now</h3>
+    <div className="bg-amber-900/30 backdrop-blur-sm rounded-lg p-0 sm:p-6 border border-amber-800/50 h-full">
+      <h3 className="text-xl font-serif text-amber-200 mb-4 p-6 sm:p-0">
+        Reading Now
+      </h3>
 
       {/* Book display */}
       <div className="relative mb-6 overflow-hidden">
@@ -61,9 +55,7 @@ const StoryReader = ({ story }) => {
               <h2 className="text-xl font-serif font-bold text-amber-900 mb-2">
                 {story.title}
               </h2>
-              <p className="text-amber-800/80 text-sm">
-                Written in {story.year}
-              </p>
+              <p className="text-amber-800/80 text-sm">{story.year}</p>
             </div>
           </div>
 
@@ -81,7 +73,7 @@ const StoryReader = ({ story }) => {
       <div className="relative">
         <div
           ref={storyContainerRef}
-          className="max-h-[400px] overflow-y-auto pr-4 rounded-lg custom-scrollbar creative-works-scrollbar"
+          className="max-h-[450px] overflow-y-auto rounded-lg custom-scrollbar creative-works-scrollbar"
         >
           <motion.div
             className="p-5 rounded-lg relative paper-texture"
@@ -99,13 +91,13 @@ const StoryReader = ({ story }) => {
             </div>
 
             {/* Opening quote/excerpt */}
-            <div className="mb-6 font-serif text-amber-900/90 text-center italic typewriter">
+            <div className="pb-8 font-serif text-amber-900/90 text-center italic typewriter">
               "{story.excerpt}"
             </div>
 
-            {/* Story content */}
-            <div className="font-serif text-amber-900/80 leading-relaxed">
-              {formattedContent}
+            {/* Story content using ReactMarkdown */}
+            <div className="font-serif text-amber-900/80 leading-relaxed story-content">
+              {story.content && <ReactMarkdown>{story.content}</ReactMarkdown>}
             </div>
 
             {/* Author signature */}
@@ -114,6 +106,9 @@ const StoryReader = ({ story }) => {
             </div>
           </motion.div>
         </div>
+
+        {/* Shadow gradient at the top to indicate scrollable content */}
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-amber-900/30 to-transparent pointer-events-none rounded-t-lg"></div>
 
         {/* Shadow gradient to indicate scrollable content */}
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-amber-900/30 to-transparent pointer-events-none rounded-b-lg"></div>

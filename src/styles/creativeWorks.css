@@ -44,25 +44,39 @@
 }
 
 /* Custom scrollbar for the entire creative works section */
+.creative-works-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(214, 184, 142, 0.3) rgba(214, 184, 142, 0.1); /* Firefox */
+}
+
+/* Default styles for webkit browsers (hide custom scrollbars on small screens) */
 .creative-works-scrollbar::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  display: none;
 }
 
-.creative-works-scrollbar::-webkit-scrollbar-track {
-  background: rgba(120, 53, 15, 0.1);
-  border-radius: 10px;
-}
+/* Apply custom scrollbars only on sm screens (640px) and above */
+@media (min-width: 640px) {
+  .creative-works-scrollbar::-webkit-scrollbar {
+    display: block;
+    width: 10px;
+    height: 10px;
+  }
 
-.creative-works-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(120, 53, 15, 0.3);
-  border-radius: 10px;
-  border: 2px solid rgba(62, 39, 18, 0.2);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
-}
+  .creative-works-scrollbar::-webkit-scrollbar-track {
+    background: rgba(120, 53, 15, 0.1);
+    border-radius: 10px;
+  }
 
-.creative-works-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(120, 53, 15, 0.5);
+  .creative-works-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(120, 53, 15, 0.3);
+    border-radius: 10px;
+    border: 2px solid rgba(62, 39, 18, 0.2);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .creative-works-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(120, 53, 15, 0.5);
+  }
 }
 
 /* Horizontal scrollbar for shelves */

@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import Shelf from "./Shelf";
 import VinylPlayer from "./VinylPlayer";
 import StoryReader from "./StoryReader";
+import {
+  loadMarkdownFile,
+  parseMarkdownWithFrontmatter,
+} from "../../utils/markdownLoader";
 
 const CreativeWorks = () => {
   // Sample album data - replace with your actual albums
@@ -62,87 +66,68 @@ const CreativeWorks = () => {
   ];
 
   // Sample stories data - replace with your actual stories
-  const stories = [
+  const storyMeta = [
     {
       id: 1,
-      title: "Cascading Awakenings",
-      year: "November 03, 2016",
+      filename: "/stories/cascading-awakenings.md",
       cover: "/images/stories/cascading-awakenings.jpg",
-      color: "#3b82f6", // Blue
-      excerpt: `I have no recollection of what happened in the past few days or 
-      weeks...`,
-      synopsis: "A man gets stuck in an endless series of false awakenings.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\nSed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.", // Replace with full story content
     },
     {
       id: 2,
-      title: "The End of Worlds",
-      year: "2017",
+      filename: "/stories/the-end-of-worlds.md",
       cover: "/images/stories/the-end-of-worlds.jpg",
-      color: "#8b5cf6", // Purple
-      excerpt:
-        "They promised eternal life, but they never mentioned the loading times.",
-      synopsis:
-        "A science fiction exploration of consciousness uploaded to digital realms after death, examining what it means to be human when our minds outlive our bodies.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 3,
-      title: "The Men Who Met God",
-      year: "2017",
+      filename: "/stories/the-men-who-met-god.md",
       cover: "/images/stories/the-men-who-met-god.jpg",
-      color: "#ec4899", // Pink
-      excerpt:
-        "The code was elegant, beautiful even. It was also completely illegal.",
-      synopsis:
-        "A tech noir tale following a programmer who discovers an algorithm that can predict human behavior with perfect accuracy, and the moral implications of wielding such power.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 4,
-      title: "Eternities",
-      year: "2017",
+      filename: "/stories/eternities.md",
       cover: "/images/stories/eternities.jpg",
-      color: "#10b981", // Green
-      excerpt:
-        "In mathematics, parallel lines never meet. In life, they sometimes do.",
-      synopsis:
-        "A contemporary drama about two strangers whose lives run parallel until a chance encounter creates an intersection neither expected, changing their trajectories forever.",
-      content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
       id: 5,
-      title: "The Mysterious Grandfather Clock",
-      year: "2017",
+      filename: "/stories/the-mysterious-grandfather-clock.md",
       cover: "/images/stories/mysterious-grandfather-clock.jpg",
-      color: "#f97316", // Orange
-      excerpt: "For a moment I thought it was alive...",
-      synopsis: `A 17th century grandfather clock in an antique shop appears to 
-      be a time machine.`,
-      content: `There is something rejuvenating about collecting mementos older 
-      than everyone alive today, anything made before the 20th century, knowing 
-      that those generational heirlooms witnessed the very histories written in 
-      our school textbooks as they unfolded. You feel like you were a part of 
-      the historical narrative. I own a coin manufactured in the late quarter of
-      the 19th century; I imagine that particular coin went through the palm 
-      and pocket of the great revolutionary leader, Andres Bonifacio himself, 
-      and how, materially, we are not that far apart. It was a gift from my 
-      uncle to me, right before my family and I moved to Legazpi City in 2004. 
-      \n\nThere is a quiet drive away from downtown full of antique shops that I 
-      frequently pass through during the sunset after work, some of them I never
-       see open. Until today. I would not notice one of these perpetually closed
-        shops being open if not for the absence of the sign that it was, well, 
-        closed. It was worth a shot. I parked my motorcycle next to the porch 
-        and stepped through the door.`,
     },
   ];
 
-  // State for selected item (album or story)
+  const [stories, setStories] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Load markdown files when component mounts
+  useEffect(() => {
+    const loadStories = async () => {
+      setLoading(true);
+
+      const loadedStories = await Promise.all(
+        storyMeta.map(async (meta) => {
+          const markdown = await loadMarkdownFile(meta.filename);
+          console.log(meta.filename);
+          const { metadata, content } = parseMarkdownWithFrontmatter(markdown);
+
+          return {
+            id: meta.id,
+            title: metadata.title || `Story ${meta.id}`,
+            year: metadata.date || "Unknown",
+            cover: metadata.cover || meta.cover,
+            color: metadata.color || "#FF6F00", // Default blue
+            excerpt: metadata.excerpt || "No excerpt available",
+            synopsis: metadata.synopsis || "No synopsis available",
+            content: content,
+          };
+        })
+      );
+
+      setStories(loadedStories);
+      setLoading(false);
+    };
+
+    loadStories();
+  }, []);
 
   // Handle album selection
   const handleSelectAlbum = (album) => {
@@ -219,10 +204,11 @@ const CreativeWorks = () => {
         </div>
         {/* <p className="text-amber-100/80 max-w-3xl"> */}
         <p className="text-amber-100/80 max-w-3xl">
-          Beyond coding, music and writing have been a consistent outlet for my
-          creative expression. In the past years, I have published album records
-          and short stories. This is my artist's corner, where you can explore
-          my oeuvre in a cozy, personal space.
+          Beyond coding, the realms of music and writing have been a consistent
+          outlet for my creative expression. In the past years, I have released
+          album records (under Uprising Records Philippines) and published short
+          stories. This is my artist's corner, where you can explore my oeuvre
+          in a cozy, personal space.
         </p>
       </motion.div>
 
@@ -247,7 +233,7 @@ const CreativeWorks = () => {
         ></div>
 
         {/* Main content area */}
-        <div className="relative z-10 p-6">
+        <div className="relative z-10 p-0 md:p-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left side - Shelf */}
             <div className="lg:col-span-1">

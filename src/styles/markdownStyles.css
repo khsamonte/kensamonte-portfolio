@@ -1,0 +1,151 @@
+/* Markdown story content styling */
+.story-content {
+  font-family: "Libre Baskerville", Georgia, serif;
+  color: #5c4b3a;
+  line-height: 1.8;
+}
+
+.story-content p {
+  margin-bottom: 1.5rem;
+}
+
+.story-content h1,
+.story-content h2,
+.story-content h3,
+.story-content h4,
+.story-content h5,
+.story-content h6 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-weight: 700;
+  color: #3c2f1f;
+}
+
+.story-content h1 {
+  font-size: 1.8rem;
+}
+
+.story-content h2 {
+  font-size: 1.5rem;
+}
+
+.story-content h3 {
+  font-size: 1.3rem;
+}
+
+.story-content a {
+  color: #8b5cf6;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.story-content a:hover {
+  color: #7c3aed;
+}
+
+.story-content blockquote {
+  border-left: 3px solid #d6b88e;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #6b5a47;
+}
+
+.story-content ul,
+.story-content ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.story-content li {
+  margin-bottom: 0.5rem;
+}
+
+.story-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.25rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.story-content code {
+  font-family: "Courier New", monospace;
+  background-color: rgba(214, 184, 142, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+
+.story-content pre {
+  background-color: rgba(214, 184, 142, 0.2);
+  padding: 1rem;
+  border-radius: 0.25rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.story-content pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/* First paragraph styling */
+.story-content p:first-of-type:first-letter {
+  float: left;
+  font-size: 3.5rem;
+  line-height: 0.65;
+  margin: 0.1em 0.1em 0.1em 0;
+  font-family: "Libre Baskerville", Georgia, serif;
+}
+
+/* Paper texture */
+.paper-texture {
+  background-color: #f9f5eb;
+  background-image: url("/images/parchment-texture.jpg");
+  background-blend-mode: multiply;
+  background-size: 100% auto;
+  background-repeat: repeat-y;
+}
+
+/* Typewriter effect for excerpt */
+.typewriter {
+  overflow: hidden;
+  border-right: 0.1em solid transparent;
+  white-space: nowrap;
+  margin: 0 auto;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    /* border-color: rgba(139, 92, 246, 0.5); */
+  }
+}
+
+@media (max-width: 640px) {
+  .story-content p {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .story-content p {
+    font-size: 14px;
+  }
+}
