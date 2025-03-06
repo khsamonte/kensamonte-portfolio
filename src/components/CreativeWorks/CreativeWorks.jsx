@@ -34,9 +34,10 @@ const CreativeWorks = () => {
       color: "#ec4899", // Pink theme color
       trackPreview: "/audio/one-night.mp3",
       description: `Serenata is my collaborative hip-hop project with Soupherb.
-      For My Daydream Dalliance is the output of our heartfelt work, comprised 
-      of tales and narratives ranging from overnight adventures and dead flames 
-      rekindled to the psycho-fatalism of heartbreaks.`,
+      Our duo naturally materialized after a couple of music sessions. For My 
+      Daydream Dalliance is the heartfelt output of our combined efforts, 
+      comprised of tales and narratives ranging from overnight adventures and 
+      dead flames rekindled to the psycho-fatalism of heartbreaks.`,
       spotifyLink:
         "https://open.spotify.com/album/5priolqwKUYVeebJ8sjArG?si=t8tYG9gESO6cihMk-3tmAQ",
       lyrics:
@@ -48,12 +49,15 @@ const CreativeWorks = () => {
       year: "2016",
       cover: "/images/albums/izakaya.jpg",
       color: "#3b82f6", // Blue theme color
-      trackPreview: "/audio/children-who-chase-lost-voices.mp3",
+      trackPreview: "/audio/inner-children.mp3",
       description: `My first release as a beatsmith when I studied music
       production back in 2016, which served as the foundation of my 
-      Japanese-influenced style of hip-hop beats.`,
+      Japanese-influenced style of hip-hop beats. The track preview, with 
+      added vocals from rappers Nakr and AMPON's Leyman's Terms, uses one of 
+      the beats from the tape.`,
       spotifyLink: "https://mckensa.bandcamp.com/album/izakaya-nights",
-      lyrics: "(This album is purely instrumental)",
+      lyrics:
+        "Her role as the crooner of the tune they used to groove to under the glow of the sun and beneath the full moon",
     },
   ];
 
