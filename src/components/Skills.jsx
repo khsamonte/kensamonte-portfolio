@@ -145,8 +145,8 @@ const Skills = () => {
       {
         category: "Development Tools",
         skills: [
-          "Git",
-          "Vite + Vercel",
+          "Git/GitHub",
+          "Vite on Vercel",
           "Webpack",
           "API Design",
           "WebSocket",
@@ -441,7 +441,7 @@ const Skills = () => {
             </svg>
           </div>
           <h2 className="text-3xl font-bold text-blue-300">
-            Skills & Expertise
+            Skills & Technologies
           </h2>
         </div>
         <p className="text-slate-400 max-w-3xl mb-6">
@@ -452,181 +452,241 @@ const Skills = () => {
       </motion.div>
 
       {/* 3D Technical Skills Visualization */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-12"
-      >
-        <h3 className="text-xl font-bold text-blue-300 mb-4">
-          Technical Skills
-        </h3>
-        {/* <p className="text-blue-200 mb-8 text-sm">Drag to rotate</p> */}
 
-        {/* Legend for category colors */}
-        <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            <motion.div
-              className="flex items-center"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <motion.div
-                className="w-4 h-4 rounded-full bg-red-500 mr-2"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              ></motion.div>
-              <span className="text-slate-300 text-sm">
-                Programming Languages
-              </span>
-            </motion.div>
-            <motion.div
-              className="flex items-center"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <motion.div
-                className="w-4 h-4 rounded-full bg-green-500 mr-2"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              ></motion.div>
-              <span className="text-slate-300 text-sm">Web Technologies</span>
-            </motion.div>
-            <motion.div
-              className="flex items-center"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <motion.div
-                className="w-4 h-4 rounded-full bg-purple-500 mr-2"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              ></motion.div>
-              <span className="text-slate-300 text-sm">
-                Frameworks & Libraries
-              </span>
-            </motion.div>
-            <motion.div
-              className="flex items-center"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <motion.div
-                className="w-4 h-4 rounded-full bg-yellow-300 mr-2"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              ></motion.div>
-              <span className="text-slate-300 text-sm">Development Tools</span>
-            </motion.div>
-            <motion.div
-              className="flex items-center"
-              whileHover={{ x: 5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 15 }}
-            >
-              <motion.div
-                className="w-4 h-4 rounded-full bg-pink-400 mr-2"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 10 }}
-              ></motion.div>
-              <span className="text-slate-300 text-sm">Design Tools</span>
-            </motion.div>
-          </div>
-        </div>
-        <div
-          ref={mountRef}
-          className="w-full h-[500px] sm:h-[750px] rounded-lg"
-        />
-      </motion.div>
-
-      {/* Two-column layout for Languages and Additional Skills on wider screens */}
+      {/* Main skills container - Two column layout for larger screens */}
+      {/* Main skills container - Two column layout for larger screens */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Left Column - 3D Technical Skills Visualization */}
         <motion.div
-          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
-          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          className="lg:col-span-1"
         >
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
-
-          <div className="flex items-center mb-6">
-            <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-blue-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                />
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold text-blue-300">Languages</h3>
-          </div>
-          {/* Single column layout for languages on all screens */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-1 gap-4">
-            {languages.map((lang, index) => (
-              <LanguageCard
-                key={index}
-                language={lang.language}
-                level={lang.level}
-                certification={lang.certification}
-              />
-            ))}
-          </div>
+          <div
+            ref={mountRef}
+            className="w-full h-[400px] sm:h-[650px] lg:h-[700px] rounded-lg"
+          />
         </motion.div>
 
-        {/* Additional Skills */}
+        {/* Right Column - Technical Skills, Languages and Additional Skills combined */}
         <motion.div
-          // className="bg-slate-800/50 rounded-lg p-6 border border-slate-700"
-          className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          className="lg:col-span-1"
         >
-          {/* Decorative elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
-          <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
+          <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden h-full">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
+            <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
 
-          <div className="flex items-center mb-6">
-            <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-blue-400"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                />
-              </svg>
+            {/* Technical Skills Section */}
+            <div className="mb-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-300">
+                  Technical Skills
+                </h3>
+              </div>
+
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <span className="text-red-500 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-red-400">
+                      Programming Languages:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      JavaScript, TypeScript, C#, Python, PHP
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-green-400">
+                      Web Technologies:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      HTML5, CSS3, styled-components, Tailwind CSS
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-blue-500 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-blue-400">
+                      Frameworks & Libraries:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      React, Vue.js, Express.js, jQuery, Highcharts, Lottie
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-purple-500 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-purple-400">
+                      Platforms & Runtimes:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      Node.js, WordPress, Unity3D
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-yellow-300 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-yellow-300">
+                      Development Tools:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      Git/GitHub, Vite, Webpack, json-server, Axios
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-indigo-400 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-indigo-400">
+                      API & Communication:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      RESTful Design, WebSocket
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-orange-400 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-orange-400">
+                      Deployment Platforms:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      Vercel, Netlify, IIS
+                    </span>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-pink-400 mr-2">❖</span>
+                  <div>
+                    <span className="font-bold text-pink-400">
+                      Design Tools:
+                    </span>
+                    <span className="text-slate-300">
+                      {" "}
+                      Figma, Lightroom, Photoshop, After Effects, LottieFiles,
+                      Premiere Pro
+                    </span>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <h3 className="text-xl font-bold text-blue-300">
-              Additional Skills
-            </h3>
+
+            {/* Languages Section */}
+            <div className="mb-8">
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-300">Languages</h3>
+              </div>
+
+              {/* Languages grid - responsive layout */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {languages.map((lang, index) => (
+                  <LanguageCard
+                    key={index}
+                    language={lang.language}
+                    level={lang.level}
+                    certification={lang.certification}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Additional Skills Section - Compact version */}
+            <div>
+              <div className="flex items-center mb-4">
+                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-300">
+                  Additional Skills
+                </h3>
+              </div>
+              <div className="text-slate-300 flex flex-wrap gap-2">
+                {additionalSkills.map((skill, index) => {
+                  // Extract just the skill name (before the colon)
+                  const skillName = skill.split(":")[0];
+                  return (
+                    <React.Fragment key={index}>
+                      <span className="inline-block bg-slate-700/50 px-3 py-1 rounded-full text-sm">
+                        {skillName}
+                      </span>
+                    </React.Fragment>
+                  );
+                })}
+              </div>
+            </div>
           </div>
-          <ul className="space-y-3">
-            {additionalSkills.map((skill, index) => (
-              <li key={index} className="text-slate-300 flex items-start">
-                <span className="text-blue-400 mr-2">❖</span>
-                <span className="text-sm md:text-base">{skill}</span>
-              </li>
-            ))}
-          </ul>
         </motion.div>
       </div>
     </section>
