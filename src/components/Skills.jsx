@@ -582,7 +582,7 @@ const Skills = () => {
                     </span>
                     <span className="text-slate-300">
                       {" "}
-                      RESTful Design, WebSocket
+                      API Design, WebSocket
                     </span>
                   </div>
                 </li>
@@ -594,7 +594,7 @@ const Skills = () => {
                     </span>
                     <span className="text-slate-300">
                       {" "}
-                      Vercel, Netlify, IIS
+                      Vercel, Netlify, Microsoft IIS, Heroku
                     </span>
                   </div>
                 </li>
