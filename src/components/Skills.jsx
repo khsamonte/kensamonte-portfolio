@@ -603,43 +603,8 @@ const Skills = () => {
               </ul>
             </div>
 
-            {/* Languages Section */}
-            <div className="mb-8">
-              <div className="flex items-center mb-6">
-                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-blue-300">Languages</h3>
-              </div>
-
-              {/* Languages grid - responsive layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {languages.map((lang, index) => (
-                  <LanguageCard
-                    key={index}
-                    language={lang.language}
-                    level={lang.level}
-                    certification={lang.certification}
-                  />
-                ))}
-              </div>
-            </div>
-
             {/* Additional Skills Section - Compact version */}
-            <div>
+            <div className="mb-8">
               <div className="flex items-center mb-4">
                 <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
                   <svg
@@ -673,6 +638,41 @@ const Skills = () => {
                     </React.Fragment>
                   );
                 })}
+              </div>
+            </div>
+
+            {/* Languages Section */}
+            <div>
+              <div className="flex items-center mb-6">
+                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6 text-blue-400"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-blue-300">Languages</h3>
+              </div>
+
+              {/* Languages grid - responsive layout */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {languages.map((lang, index) => (
+                  <LanguageCard
+                    key={index}
+                    language={lang.language}
+                    level={lang.level}
+                    certification={lang.certification}
+                  />
+                ))}
               </div>
             </div>
           </div>
