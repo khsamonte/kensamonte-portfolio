@@ -1,13 +1,25 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import "../../styles/vinylStyles.css";
 
 const VinylPlayer = ({ album }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [currentLyric, setCurrentLyric] = useState(album.lyrics || "");
+  const [isAlbumOpen, setIsAlbumOpen] = useState(false);
 
   // Clean up audio when component unmounts or album changes
   useEffect(() => {
+    // Reset player state when album changes
+    setIsPlaying(false);
+    setCurrentLyric(album.lyrics || "");
+
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+    }
+
+    // Clean up on unmount
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -33,8 +45,117 @@ const VinylPlayer = ({ album }) => {
     <div className="bg-amber-900/30 backdrop-blur-sm rounded-lg p-6 border border-amber-800/50 h-full">
       <h3 className="text-xl font-serif text-amber-200 mb-6">Now Playing</h3>
 
-      <div className="flex items-center justify-center mb-8">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
+        {/* 3D Album Cover */}
+        <motion.div
+          className="relative perspective w-64 h-64"
+          initial={{ rotateY: -10 }}
+          transition={{
+            duration: isAlbumOpen ? 0.8 : 2,
+            type: "spring",
+            stiffness: isAlbumOpen ? 100 : 50,
+            repeatType: "reverse",
+            ease: "easeInOut",
+          }}
+        >
+          {/* Environment shadow */}
+          <div
+            className="absolute bottom-0 w-56 h-4 bg-black/30 rounded-full blur-md mx-auto left-0 right-0"
+            style={{
+              transition: "transform 2s ease-in-out",
+              opacity: 0.6,
+            }}
+          ></div>
+
+          {/* Album Case - Outside Cover */}
+          <motion.div
+            onClick={() => setIsAlbumOpen(!isAlbumOpen)}
+            className="absolute w-64 h-64 bg-[#151515] rounded-md shadow-2xl transform-gpu transition-all duration-300 cursor-pointer"
+            style={{
+              transformStyle: "preserve-3d",
+              transform: "rotateY(-10deg)",
+              boxShadow:
+                isPlaying && !isAlbumOpen
+                  ? "0 10px 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 177, 60, 0.3)"
+                  : "0 10px 30px rgba(0, 0, 0, 0.4)",
+            }}
+            animate={
+              isPlaying && !isAlbumOpen
+                ? {
+                    boxShadow: [
+                      "0 10px 30px rgba(0, 0, 0, 0.4), 0 0 5px rgba(255, 177, 60, 0.1)",
+                      "0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 177, 60, 0.3)",
+                      "0 10px 30px rgba(0, 0, 0, 0.4), 0 0 5px rgba(255, 177, 60, 0.1)",
+                    ],
+                  }
+                : {}
+            }
+            transition={
+              isPlaying && !isAlbumOpen
+                ? {
+                    boxShadow: {
+                      duration: 1.5,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                    },
+                  }
+                : {}
+            }
+            initial={{
+              scale: 1,
+              rotateY: 0,
+              transition: { duration: 0.3 },
+            }}
+            whileHover={{
+              scale: 1.05,
+              rotateY: 25,
+              transition: { duration: 0.3 },
+            }}
+          >
+            {/* Album Cover Art */}
+            <div className="w-full h-full rounded-md overflow-hidden relative">
+              <img
+                src={album.cover}
+                alt={album.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src =
+                    "https://via.placeholder.com/300x300?text=Album+Cover";
+                }}
+              />
+              <div className="album-cover-shine"></div>
+
+              {/* Album title overlay at bottom */}
+              {/* <div className="absolute bottom-0 left-0 right-0 bg-black/70 backdrop-blur-sm p-2 text-center">
+                <p className="text-amber-100 text-sm font-medium truncate">
+                  {album.title}
+                </p>
+              </div> */}
+            </div>
+
+            {/* Album Spine */}
+            {/* <div
+              className="absolute top-0 right-0 w-4 h-full bg-[#222] transform-gpu origin-right"
+              style={{
+                transform: "rotateY(90deg) translateZ(-2px)",
+                boxShadow: "inset -2px 0 3px rgba(0, 0, 0, 0.3)",
+              }}
+            ></div> */}
+
+            {/* Album Edge Effects */}
+            <div className="absolute top-0 bottom-0 left-0 w-1 bg-gradient-to-r from-transparent to-black/50"></div>
+          </motion.div>
+        </motion.div>
+
+        {/* Turntable */}
         <div className="relative">
+          {/* Environment shadow */}
+          <div
+            className="absolute bottom-0 w-56 h-4 bg-black/30 rounded-full blur-md mx-auto left-0 right-0 z-0"
+            style={{ opacity: 0.4 }}
+          ></div>
+
           {/* Turntable base */}
           <div className="w-64 h-64 rounded-lg bg-[#2c1a0d] shadow-lg relative overflow-hidden">
             {/* Decorative wood grain */}
@@ -110,6 +231,31 @@ const VinylPlayer = ({ album }) => {
       <div className="mb-6 text-center">
         <h3 className="text-lg font-serif text-amber-200">{album.title}</h3>
         <p className="text-amber-100/70 text-sm">{album.year}</p>
+
+        {/* Track list that appears when album is opened */}
+        {/* <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{
+            opacity: isAlbumOpen ? 1 : 0,
+            height: isAlbumOpen ? "auto" : 0,
+          }}
+          transition={{ duration: 0.5 }}
+          className="overflow-hidden"
+        >
+          <div className="mt-4 mb-4 bg-amber-900/30 p-3 rounded-lg border border-amber-800/30">
+            <h4 className="text-amber-200 text-sm font-medium mb-2">
+              Track List
+            </h4>
+            <ol className="text-left text-amber-100/80 text-sm list-decimal pl-5 space-y-1">
+              <li>Intro - The Beginning</li>
+              <li>Strange Weather (feat. Raindrops)</li>
+              <li>Manila Sunrise</li>
+              <li>Nighttime Rhythm</li>
+              <li>Outro - Until Next Time</li>
+            </ol>
+          </div>
+        </motion.div> */}
+
         <p className="text-amber-100/80 mt-3">{album.description}</p>
       </div>
 

@@ -1,0 +1,67 @@
+/* Vinyl Player 3D Effects */
+.perspective {
+  perspective: 1000px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .perspective {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Vinyl record grooves shine effect */
+.vinyl-groove-shine {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* Dust and scratches overlay */
+.dust-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: url("/images/vinyl-texture.jpg");
+  background-size: cover;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Tonearm/needle animation for play state */
+.needle-on {
+  transform: rotate(20deg);
+  transition: transform 0.8s ease-out;
+}
+
+.needle-off {
+  transform: rotate(-10deg);
+  transition: transform 0.4s ease-in;
+}
+
+/* Album case shine effect */
+.album-cover-shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+  border-radius: 4px;
+}
