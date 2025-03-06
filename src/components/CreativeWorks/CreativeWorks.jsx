@@ -32,13 +32,15 @@ const CreativeWorks = () => {
       year: "2017",
       cover: "/images/albums/fmdd.jpg",
       color: "#ec4899", // Pink theme color
-      trackPreview: "/audio/album2-preview.mp3",
+      trackPreview: "/audio/one-night.mp3",
       description: `Serenata is my collaborative hip-hop project with Soupherb.
       For My Daydream Dalliance is the output of our heartfelt work, comprised 
       of tales and narratives ranging from overnight adventures and dead flames 
       rekindled to the psycho-fatalism of heartbreaks.`,
-      spotifyLink: "https://open.spotify.com/album/your-album-id",
-      lyrics: "City lights paint shadows on the wall, a canvas of dreams...",
+      spotifyLink:
+        "https://open.spotify.com/album/5priolqwKUYVeebJ8sjArG?si=t8tYG9gESO6cihMk-3tmAQ",
+      lyrics:
+        "I was magnetized by your gravitational pull, you've been holding me together like Jupiter's moons",
     },
     {
       id: 3,
@@ -46,12 +48,12 @@ const CreativeWorks = () => {
       year: "2016",
       cover: "/images/albums/izakaya.jpg",
       color: "#3b82f6", // Blue theme color
-      trackPreview: "/audio/album3-preview.mp3",
+      trackPreview: "/audio/children-who-chase-lost-voices.mp3",
       description: `My first release as a beatsmith when I studied music
       production back in 2016, which served as the foundation of my 
       Japanese-influenced style of hip-hop beats.`,
-      spotifyLink: "https://open.spotify.com/album/your-album-id",
-      lyrics: "Drifting through clouds of memory, where time stands still...",
+      spotifyLink: "https://mckensa.bandcamp.com/album/izakaya-nights",
+      lyrics: "(This album is purely instrumental)",
     },
   ];
 
