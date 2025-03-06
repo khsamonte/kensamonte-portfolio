@@ -1,7 +1,7 @@
 ---
 title: The End of Worlds
 date: February 21, 2017
-excerpt: The Muskians were not ready to discard their deep-rooted belief in a flat Flat Earth.
+excerpt: The Muskians were not ready to discard their deep-rooted belief in a flat Earth.
 synopsis: The apocalypse has come. Two polarising scientists wage a psychological war for the destiny of humanity.
 ---
 

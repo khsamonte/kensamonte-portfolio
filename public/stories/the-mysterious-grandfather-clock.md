@@ -2,7 +2,7 @@
 title: The Mysterious Grandfather Clock
 date: March 19, 2017
 excerpt: I thought it was alive, how it stared back to me with such spellbinding allure.
-synopsis: A 17th century grandfather clock in an antique shop appears to be a time machine.
+synopsis: A 17th-century grandfather clock in an antique shop appears to be a time machine.
 ---
 
 There is something rejuvenating about collecting mementos older than everyone alive today, anything made before the 20th century, knowing that those generational heirlooms witnessed the very histories written in our school textbooks as they unfolded. You feel like you are a part of the historical narrative. I own a coin manufactured in the late quarter of the 19th century; I imagine that particular coin went through the palm and pocket of the great revolutionary leader, Andres Bonifacio himself, and how, materially, we are not that far apart. It was a gift from my uncle to me, right before my family and I moved to Legazpi City in 2004.

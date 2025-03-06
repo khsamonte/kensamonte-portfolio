@@ -2,7 +2,7 @@
 title: Eternities
 date: March 19, 2017
 excerpt: The genocides of the past were the best of times, indeed.
-synopsis: The afterlife of a mass-murderer, as narrated by Death..
+synopsis: The afterlife of a mass-murderer, as narrated by Death.
 ---
 
 For my whole stay here in the world of humans, I witnessed several men who cultivated a hostile obsession with my power. Men who had given me a thousand souls in the span of several years. But among these spectacular men, only one man has convinced millions of people to side with me. Only one man has brought up an army and an ideology — or more aptly, a religion — in which I am proclaimed as God. "The big unifier," they deemed me. Deathism. I have never felt this kind of overwhelming intensity before. The genocides of the past were the best of times, indeed, but a time where a religion that worshipped my power existed? I feel indestructible. I feel all-powerful. The times are changing.
