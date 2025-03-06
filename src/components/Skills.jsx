@@ -534,7 +534,7 @@ const Skills = () => {
                     </span>
                     <span className="text-slate-300">
                       {" "}
-                      HTML5, CSS3, styled-components, Tailwind CSS
+                      HTML5, CSS3, styled-components, Tailwind CSS, Canvas API
                     </span>
                   </div>
                 </li>
@@ -546,7 +546,7 @@ const Skills = () => {
                     </span>
                     <span className="text-slate-300">
                       {" "}
-                      React, Vue.js, Express.js, jQuery, Highcharts, Lottie
+                      React, Vue.js, Express.js, Lottie, Three.js, jQuery
                     </span>
                   </div>
                 </li>
@@ -570,19 +570,8 @@ const Skills = () => {
                     </span>
                     <span className="text-slate-300">
                       {" "}
-                      Git/GitHub, Vite, Webpack, json-server, Axios
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-indigo-400 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-indigo-400">
-                      API & Communication:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      API Design, WebSocket
+                      Git/GitHub, Vite, Webpack, json-server, Axios, WebSocket,
+                      API Design
                     </span>
                   </div>
                 </li>
