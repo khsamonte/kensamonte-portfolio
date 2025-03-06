@@ -1,0 +1,235 @@
+/* Creative Works Section CSS */
+
+/* Book spine effect */
+.book-spine {
+  position: relative;
+  transform-origin: left center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.book-spine:hover {
+  transform: translateX(5px);
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Vinyl Record Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom scrollbar for manuscript */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(120, 53, 15, 0.1);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(120, 53, 15, 0.3);
+  border-radius: 10px;
+  border: 2px solid rgba(245, 241, 230, 0.8);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 53, 15, 0.5);
+}
+
+/* Custom scrollbar for the entire creative works section */
+.creative-works-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.creative-works-scrollbar::-webkit-scrollbar-track {
+  background: rgba(120, 53, 15, 0.1);
+  border-radius: 10px;
+}
+
+.creative-works-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(120, 53, 15, 0.3);
+  border-radius: 10px;
+  border: 2px solid rgba(62, 39, 18, 0.2);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.creative-works-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 53, 15, 0.5);
+}
+
+/* Horizontal scrollbar for shelves */
+.shelf-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+
+.shelf-scrollbar::-webkit-scrollbar-track {
+  background: rgba(93, 59, 29, 0.2);
+  border-radius: 10px;
+}
+
+.shelf-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(62, 39, 18, 0.5);
+  border-radius: 10px;
+  border: 1px solid rgba(93, 59, 29, 0.3);
+}
+
+.shelf-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(62, 39, 18, 0.7);
+}
+
+/* Page turn effect */
+@keyframes pageFlip {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: rotateY(15deg);
+    box-shadow: -15px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Vinyl groove shine effect */
+.vinyl-groove-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    45deg,
+    transparent 48%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 52%
+  );
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Album and book hover effects */
+.shelf-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.shelf-item:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Paper texture for manuscripts */
+.paper-texture {
+  background-color: #f5f1e6;
+  background-image: url("/images/parchment-texture.jpg");
+  background-blend-mode: multiply;
+  background-size: cover;
+  color: #5c3b1d;
+}
+
+/* Typewriter effect for story reading */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typewriter 3s steps(40, end) forwards;
+}
+
+/* Ambient lighting effect */
+.ambient-light {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 191, 0, 0.15) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+  filter: blur(20px);
+}
+
+/* Gramophone needle animation */
+@keyframes needleOn {
+  from {
+    transform: rotate(-20deg);
+  }
+  to {
+    transform: rotate(20deg);
+  }
+}
+
+.needle-on {
+  animation: needleOn 0.8s ease forwards;
+}
+
+.needle-off {
+  animation: needleOn 0.8s ease backwards reverse;
+}
+
+/* Wooden texture enhancement */
+.wood-texture {
+  background-image: url("/images/wooden-background.jpg");
+  background-size: cover;
+  position: relative;
+}
+
+.wood-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0) 20%
+  );
+  pointer-events: none;
+}
+
+/* Dust and scratches overlay for vinyl */
+.dust-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("/images/dust-overlay.png");
+  background-size: cover;
+  opacity: 0.1;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+/* Flip animation for selecting items */
+@keyframes flip {
+  0% {
+    transform: rotateY(0);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-item {
+  animation: flip 0.5s ease-out forwards;
+}

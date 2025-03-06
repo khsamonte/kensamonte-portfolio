@@ -1,13 +1,18 @@
 import React, { Suspense, lazy } from "react";
 import Header from "./components/Header";
-import EasterEggs from "./components/EasterEggs";
-import EasterEggCollection from "./components/EasterEggCollection";
+import EasterEggs from "./components/EasterEggs/EasterEggs";
+import EasterEggCollection from "./components/EasterEggs/EasterEggCollection";
+import Footer from "./components/Footer";
+import "./styles/creativeWorks.css";
 
 // Lazy load components
 const Projects = lazy(() => import("./components/Projects"));
 const Experience = lazy(() => import("./components/Experience"));
 const Skills = lazy(() => import("./components/Skills"));
 const Contact = lazy(() => import("./components/Contact"));
+const CreativeWorks = lazy(() =>
+  import("./components/CreativeWorks/CreativeWorks")
+);
 
 // Loading component
 const LoadingFallback = () => (
@@ -33,8 +38,12 @@ function App() {
           <Experience />
         </Suspense>
         <Suspense fallback={<LoadingFallback />}>
+          <CreativeWorks />
+        </Suspense>
+        <Suspense fallback={<LoadingFallback />}>
           <Contact />
         </Suspense>
+        <Footer />
       </main>
     </div>
   );
