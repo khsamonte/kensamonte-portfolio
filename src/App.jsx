@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from "react";
 import Header from "./components/Header";
 import EasterEggs from "./components/EasterEggs/EasterEggs";
 import EasterEggCollection from "./components/EasterEggs/EasterEggCollection";
-import Footer from "./components/Footer";
 import ThemedSpinner from "./components/ThemedSpinner";
 import "./styles/creativeWorks.css";
 import "./styles/markdownStyles.css";
@@ -38,7 +37,6 @@ function App() {
         <Suspense fallback={<ThemedSpinner />}>
           <Contact />
         </Suspense>
-        <Footer />
       </main>
     </div>
   );

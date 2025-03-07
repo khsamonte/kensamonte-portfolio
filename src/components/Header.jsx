@@ -12,12 +12,39 @@ const Header = () => {
       const sections = document.querySelectorAll("section[id]");
       let currentSection = "home";
 
+      // Track which section has the most visibility
+      let maxVisibleSection = null;
+      let maxVisiblePercentage = 0;
+
       sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100;
-        if (window.scrollY >= sectionTop) {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+
+        // Calculate how much of the section is visible in the viewport
+        const visibleHeight =
+          Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0);
+        const sectionHeight = rect.height;
+
+        // Calculate percentage of section visible (0 to 1)
+        const visiblePercentage =
+          sectionHeight > 0 ? visibleHeight / sectionHeight : 0;
+
+        // If this section has more visibility than our current max, update it
+        if (visiblePercentage > maxVisiblePercentage) {
+          maxVisiblePercentage = visiblePercentage;
+          maxVisibleSection = section.getAttribute("id");
+        }
+
+        // Fallback: if section's top is above viewport middle, consider it active
+        if (rect.top <= windowHeight / 2) {
           currentSection = section.getAttribute("id");
         }
       });
+
+      // If we found a section with good visibility, use that
+      if (maxVisibleSection && maxVisiblePercentage > 0.3) {
+        currentSection = maxVisibleSection;
+      }
 
       setActiveSection(currentSection);
     };

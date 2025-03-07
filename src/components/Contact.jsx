@@ -139,7 +139,7 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-16">
+    <section id="contact" className="py-16 pb-0">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -338,6 +338,18 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
+
+      <section id="footer" className="">
+        <div className="mt-16 pt-8 border-t border-slate-800 text-center">
+          <p className="text-slate-400">
+            © {new Date().getFullYear()} Ken Samonte. All rights reserved.
+          </p>
+          <p className="text-sm text-slate-500 mt-2">
+            Built with React and Vite. All images and creative works on this
+            site belong to Ken Samonte.
+          </p>
+        </div>
+      </section>
     </section>
   );
 };
