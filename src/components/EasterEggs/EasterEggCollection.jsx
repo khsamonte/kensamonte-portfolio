@@ -130,7 +130,7 @@ const EasterEggCollection = () => {
             />
 
             <motion.div
-              className="relative bg-slate-800 rounded-lg shadow-lg max-w-2xl w-full overflow-hidden border border-blue-500/30 max-h-[80vh] flex flex-col"
+              className="relative bg-slate-800 rounded-lg shadow-lg max-w-2xl w-full overflow-hidden border border-blue-500/30 max-h-[80vh] max-h-[80dvh] flex flex-col"
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
