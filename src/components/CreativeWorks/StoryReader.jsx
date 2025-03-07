@@ -102,7 +102,7 @@ const StoryReader = ({ story }) => {
 
             {/* Author signature */}
             <div className="mt-8 text-right font-serif text-amber-800 italic">
-              - Ken Samonte
+              - Ken S.
             </div>
           </motion.div>
         </div>
