@@ -10,3 +10,16 @@
   height: auto !important;
   min-height: 100vh;
 }
+
+/* Hero Picture */
+.perspective-800 {
+  perspective: 800px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}

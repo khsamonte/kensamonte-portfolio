@@ -4,6 +4,9 @@ import { Parallax } from "react-parallax";
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState("home");
+  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
   const { scrollYProgress } = useScroll();
 
   // Handle scroll-based navigation highlighting
@@ -78,8 +81,8 @@ const Header = () => {
       {/* Navigation Bar */}
       <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-sm z-50 border-b border-slate-800">
         <div className="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between">
-          <motion.h1
-            className="text-xl font-bold text-blue-400 cursor-pointer"
+          <motion.div
+            className="flex items-center cursor-pointer"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
@@ -87,8 +90,13 @@ const Header = () => {
               window.dispatchEvent(new CustomEvent("logo-clicked"));
             }}
           >
-            Ken Samonte
-          </motion.h1>
+            <img
+              src="/images/logo.png"
+              alt="Ken Samonte Logo"
+              className="h-10 w-10 mr-2"
+            />
+            <h1 className="text-xl font-bold text-blue-400">Ken Samonte</h1>
+          </motion.div>
 
           <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
@@ -167,21 +175,62 @@ const Header = () => {
             <div className="flex flex-col md:flex-row items-center gap-8">
               {/* Profile Image */}
               <motion.div
-                className="w-48 h-48 rounded-full overflow-hidden border-4 border-blue-500 shadow-lg"
+                className="w-48 h-48 cursor-pointer perspective-800"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+                onClick={() => setIsFlipped(!isFlipped)}
               >
-                <img
-                  src="/images/ken.jpg"
-                  alt="Profile"
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src =
-                      "https://via.placeholder.com/400x400.png?text=Your+Photo";
+                <div
+                  className="relative w-full h-full transition-transform duration-700 transform-style-3d"
+                  style={{
+                    transformStyle: "preserve-3d",
+                    transform: isFlipped
+                      ? "rotateY(180deg)"
+                      : isHovered
+                      ? "rotateY(30deg)" // Partial rotation on hover
+                      : "rotateY(0deg)",
                   }}
-                />
+                >
+                  {/* Front side - Photo */}
+                  <div
+                    className="absolute w-full h-full rounded-full overflow-hidden border-4 border-blue-500 shadow-lg backface-hidden"
+                    style={{ backfaceVisibility: "hidden" }}
+                  >
+                    <img
+                      src="/images/ken.jpg"
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src =
+                          "https://via.placeholder.com/400x400.png?text=Your+Photo";
+                      }}
+                    />
+                  </div>
+
+                  {/* Back side - Logo */}
+                  <div
+                    className="absolute w-full h-full rounded-full overflow-hidden border-4 border-blue-500 shadow-lg backface-hidden bg-slate-900 flex items-center justify-center"
+                    style={{
+                      backfaceVisibility: "hidden",
+                      transform: "rotateY(180deg)",
+                    }}
+                  >
+                    <img
+                      src="/images/logo.png"
+                      alt="Ken Samonte Logo"
+                      className="w-3/4 h-3/4 object-contain"
+                    />
+                  </div>
+                </div>
+
+                {/* Optional hover hint */}
+                <div className="mt-2 text-xs text-blue-400/70 text-center opacity-0 transition-opacity hover:opacity-100">
+                  Click to flip
+                </div>
               </motion.div>
 
               {/* Hero Content */}
