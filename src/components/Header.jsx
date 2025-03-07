@@ -146,7 +146,7 @@ const Header = () => {
                 transition={{ duration: 0.5 }}
               >
                 <img
-                  src="/images/ken2.jpg"
+                  src="/images/ken.jpg"
                   alt="Profile"
                   className="w-full h-full object-cover"
                   onError={(e) => {

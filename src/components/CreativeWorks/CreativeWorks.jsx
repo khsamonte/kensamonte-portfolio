@@ -207,8 +207,7 @@ const CreativeWorks = () => {
           Beyond coding, the realms of music and writing have been a consistent
           outlet for my creative expression. In the past years, I have released
           album records (under Uprising Records Philippines) and published short
-          stories. This is my artist's corner, where you can explore my oeuvre
-          in a cozy, personal space.
+          stories. This is my artist's corner, where you can explore my oeuvre.
         </p>
       </motion.div>
 

@@ -247,7 +247,7 @@ const Shelf = ({
 
             {/* Books row */}
             <div
-              className="flex overflow-x-auto py-6 px-2 gap-1 bg-[#5d3b1d]/70 rounded-md shelf-scrollbar"
+              className="flex overflow-x-auto py-2 pb-0 px-2 gap-1 bg-[#5d3b1d]/70 rounded-md shelf-scrollbar"
               style={{ boxShadow: "inset 0 5px 15px rgba(0,0,0,0.3)" }}
             >
               {stories.map((story) => (
@@ -270,7 +270,7 @@ const Shelf = ({
                     className="book-spine w-12 h-40 relative rounded-sm shadow-lg"
                     style={{
                       backgroundColor: getWoodyColor(story.id), // We'll create this function
-                      backgroundImage: "url('/images/wood-grain.jpg')",
+                      backgroundImage: "url('/images/book-cover.jpg')",
                       backgroundBlendMode: "multiply",
                       backgroundSize: "cover",
                       boxShadow: isSelected({ ...story, type: "story" })
