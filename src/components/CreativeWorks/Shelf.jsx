@@ -7,6 +7,8 @@ import {
   playRecordScratchSound,
 } from "../../utils/shelfUtils";
 
+import { trackCreativeWorkInteraction } from "../../utils/analytics";
+
 const Shelf = ({
   albums,
   stories,
@@ -48,6 +50,7 @@ const Shelf = ({
   // Handle album selection with sound effect
   const handleAlbumSelect = (album) => {
     playRecordScratchSound().then(() => {
+      trackCreativeWorkInteraction("album", album.title);
       onSelectAlbum(album);
     });
   };
@@ -55,6 +58,7 @@ const Shelf = ({
   // Handle story selection with page turning sound
   const handleStorySelect = (story) => {
     playPageTurnSound().then(() => {
+      trackCreativeWorkInteraction("story", story.title);
       onSelectStory(story);
     });
   };

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { motion } from "framer-motion";
+import { trackSkillInteraction } from "../utils/analytics";
 
 // const THREE = lazy(() => import("three"));
 // const OrbitControls = lazy(() => import("three/examples/jsm/controls/OrbitControls"))
@@ -257,6 +258,12 @@ const Skills = () => {
         const nodeGeometry = new THREE.SphereGeometry(0.4, 16, 16);
         const node = new THREE.Mesh(nodeGeometry, nodeMaterial);
 
+        // Add click detection
+        node.userData = { skillName: skill.name };
+        node.callback = () => {
+          trackSkillInteraction(skill.name);
+        };
+
         // Position at vertex
         node.position.copy(vertices[index]);
         scene.add(node);
@@ -406,8 +413,34 @@ const Skills = () => {
 
     window.addEventListener("resize", handleResize);
 
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    const handleSkillClick = (event) => {
+      // Calculate mouse position in normalized device coordinates
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      // Cast ray from camera through mouse position
+      raycaster.setFromCamera(mouse, camera);
+
+      // Check for intersections with skill nodes
+      const intersects = raycaster.intersectObjects(scene.children);
+
+      if (intersects.length > 0) {
+        const clickedObject = intersects[0].object;
+        if (clickedObject.userData && clickedObject.userData.skillName) {
+          trackSkillInteraction(clickedObject.userData.skillName);
+        }
+      }
+    };
+
+    renderer.domElement.addEventListener("click", handleSkillClick);
+
     // Clean up
     return () => {
+      renderer.domElement.removeEventListener("click", handleSkillClick);
       window.removeEventListener("resize", handleResize);
       if (currentRef && renderer.domElement) {
         currentRef.removeChild(renderer.domElement);

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { trackProjectClick } from "../utils/analytics";
 
 import { drawCryptoPriceVisualization } from "../utils/visualizations/CryptoPriceVisualization";
 import { drawSoccerMatchVisualization } from "../utils/visualizations/SoccerMatchVisualization";
@@ -194,6 +195,7 @@ const ProjectShowcase = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
+      onClick={trackProjectClick}
       whileHover={{
         y: -8,
         boxShadow:

@@ -2,6 +2,7 @@
  * Easter Egg Manager - keeps track of found Easter eggs
  * Uses localStorage to persist found Easter eggs between sessions
  */
+import { trackEasterEggDiscovery } from "../analytics";
 
 // Configuration for all available Easter eggs
 const EASTER_EGGS = {
@@ -75,6 +76,9 @@ export const discoverEasterEgg = (eggId) => {
   const savedData = localStorage.getItem(STORAGE_KEY);
   const discoveredEggs = savedData ? JSON.parse(savedData) : {};
 
+  // Check if this egg was already discovered
+  const isNewDiscovery = !discoveredEggs[eggId];
+
   // Mark as discovered
   discoveredEggs[eggId] = true;
 
@@ -87,6 +91,13 @@ export const discoverEasterEgg = (eggId) => {
       detail: { eggId },
     })
   );
+
+  // Track the discovery in analytics (only if it's newly discovered)
+  if (isNewDiscovery) {
+    const eggName =
+      Object.values(EASTER_EGGS).find((egg) => egg.id === eggId)?.name || eggId;
+    trackEasterEggDiscovery(eggName);
+  }
 
   return true;
 };

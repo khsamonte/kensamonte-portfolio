@@ -106,7 +106,6 @@ const CreativeWorks = () => {
       const loadedStories = await Promise.all(
         storyMeta.map(async (meta) => {
           const markdown = await loadMarkdownFile(meta.filename);
-          console.log(meta.filename);
           const { metadata, content } = parseMarkdownWithFrontmatter(markdown);
 
           return {

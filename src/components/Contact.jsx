@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
+import { trackContactFormSubmission } from "../utils/analytics";
+
 const Contact = () => {
   const form = useRef();
   const [formData, setFormData] = useState({
@@ -33,13 +35,15 @@ const Contact = () => {
     });
 
     try {
-      // Replace with your actual EmailJS service ID, template ID, and public key
       await emailjs.sendForm(
         "service_wktkt7j",
         "template_03w6toc",
         form.current,
         "YfwRbA59kdTP9_-BC"
       );
+
+      // Track successful form submission
+      trackContactFormSubmission();
 
       setStatus({
         submitted: true,
