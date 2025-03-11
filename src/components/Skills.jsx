@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { trackSkillInteraction } from "../utils/analytics";
 
-// const THREE = lazy(() => import("three"));
-// const OrbitControls = lazy(() => import("three/examples/jsm/controls/OrbitControls"))
-
-// Original LanguageCard component from your code
+// LanguageCard component
 const LanguageCard = ({ language, level, certification = null }) => {
   let proficiencyWidth;
 
   switch (level) {
+    case "N":
+      proficiencyWidth = "100%";
+      break;
     case "C2":
       proficiencyWidth = "100%";
       break;
@@ -38,7 +38,7 @@ const LanguageCard = ({ language, level, certification = null }) => {
   }
 
   return (
-    <div className="bg-slate-800 rounded-lg p-4 border border-slate-700">
+    <div className="bg-slate-800/80 rounded-lg p-4 border border-slate-700 hover:border-blue-500/30 transition-colors">
       <div className="flex justify-between items-center mb-2">
         <h4 className="font-bold text-white">{language}</h4>
         <span className="text-blue-300 text-sm">{level}</span>
@@ -61,29 +61,312 @@ const LanguageCard = ({ language, level, certification = null }) => {
   );
 };
 
+// Skill Badge component for the new design
+const SkillBadge = ({ name, color, icon, category, onClick, isActive }) => {
+  return (
+    <motion.div
+      className={`px-3 py-2 rounded-lg cursor-pointer border transition-all ${
+        isActive
+          ? "border-" + color + "-500 bg-" + color + "-500/10"
+          : "border-slate-700 bg-slate-800/60 hover:bg-slate-700/40"
+      }`}
+      whileHover={{ y: -3, boxShadow: "0 4px 12px rgba(0,0,0,0.2)" }}
+      whileTap={{ y: -1 }}
+      onClick={() => onClick(name, category)}
+    >
+      <div className="flex items-center space-x-2">
+        {icon && <span className={`text-${color}-400`}>{icon}</span>}
+        <span
+          className={`text-sm font-medium ${
+            isActive ? "text-" + color + "-400" : "text-slate-300"
+          }`}
+        >
+          {name}
+        </span>
+      </div>
+    </motion.div>
+  );
+};
+
+// Skill category card component
+const SkillCategoryCard = ({
+  category,
+  icon,
+  color,
+  skills,
+  isSelected,
+  onSelect,
+}) => {
+  return (
+    <motion.div
+      className={`rounded-xl overflow-hidden transition-all duration-300 cursor-pointer ${
+        isSelected
+          ? "border-2 border-" +
+            color +
+            "-500 bg-gradient-to-br from-slate-800 to-slate-900"
+          : "border border-slate-700 bg-slate-800/40 hover:bg-slate-800/70"
+      }`}
+      whileHover={{ y: -5 }}
+      whileTap={{ y: -2 }}
+      onClick={() => onSelect(category)}
+      layout
+    >
+      <div className="p-5">
+        <div className="flex items-center mb-4">
+          <div
+            className={`w-10 h-10 flex items-center justify-center rounded-lg mr-3 bg-${color}-500/20`}
+          >
+            <span className={`text-${color}-400 text-xl`}>{icon}</span>
+          </div>
+          <h3 className="text-lg font-bold text-white">{category}</h3>
+        </div>
+
+        {isSelected ? (
+          <div className="mt-4">
+            <div className="flex flex-wrap gap-2">
+              {skills.map((skill, index) => (
+                <motion.span
+                  key={index}
+                  className={`px-3 py-1 bg-${color}-500/10 text-${color}-400 rounded text-sm border border-${color}-500/30`}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="text-slate-400 text-sm line-clamp-1">
+            {skills.slice(0, 3).join(", ")}{" "}
+            {skills.length > 3 && `+${skills.length - 3} more`}
+          </p>
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
   const mountRef = useRef(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedSkill, setSelectedSkill] = useState(null);
+  const [activeView, setActiveView] = useState("categories"); // "categories", "all-skills", "languages"
 
-  // Define additional skills from original component
-  const additionalSkills = [
-    "Video Editing: Familiar with the basics of Premiere Pro for video content creation.",
-    "Content Writing: Experienced in writing SEO-optimized web content and news articles.",
-    "Technical Writing: Proficient in creating detailed documentation for internal developer processes.",
-    "Animation Integration: Experienced in designing 2D animations and integrating them into the web.",
-    "Music Production: Knowledgeable in writing lyrics, producing music, and audio mixing and mastering.",
+  // Define skill categories
+  const skillCategories = [
+    {
+      id: "programming",
+      category: "Programming Languages",
+      color: "red",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+          />
+        </svg>
+      ),
+      skills: ["JavaScript", "TypeScript", "C#", "Python", "PHP"],
+    },
+    {
+      id: "web",
+      category: "Web Technologies",
+      color: "green",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
+          />
+        </svg>
+      ),
+      skills: [
+        "HTML5",
+        "CSS3",
+        "styled-components",
+        "Tailwind CSS",
+        "Canvas API",
+      ],
+    },
+    {
+      id: "frameworks",
+      category: "Frameworks & Libraries",
+      color: "blue",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
+          />
+        </svg>
+      ),
+      skills: [
+        "React",
+        "Vue.js",
+        "Lottie",
+        "Three.js",
+        "jQuery",
+        "Express.js",
+        "framer-motion",
+      ],
+    },
+    {
+      id: "platforms",
+      category: "Platforms & Runtimes",
+      color: "purple",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M8 16h.01"
+          />
+        </svg>
+      ),
+      skills: ["Node.js", "WordPress", "Unity3D"],
+    },
+    {
+      id: "devtools",
+      category: "Development Tools",
+      color: "yellow",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+        </svg>
+      ),
+      skills: [
+        "Git/GitHub",
+        "Vite",
+        "Webpack",
+        "json-server",
+        "Axios",
+        "WebSocket",
+        "API Design",
+      ],
+    },
+    {
+      id: "deployment",
+      category: "Deployment Platforms",
+      color: "orange",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"
+          />
+        </svg>
+      ),
+      skills: ["Vercel", "Netlify", "Microsoft IIS", "Heroku"],
+    },
+    {
+      id: "design",
+      category: "Design Tools",
+      color: "pink",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+          />
+        </svg>
+      ),
+      skills: [
+        "Figma",
+        "Lightroom",
+        "Photoshop",
+        "After Effects",
+        "LottieFiles",
+        "Premiere Pro",
+      ],
+    },
   ];
 
-  // Define languages from original component
+  // Additional skills
+  const additionalSkills = [
+    "Video Editing",
+    "Content Writing",
+    "Technical Writing",
+    "Animation Integration",
+    "Music Production",
+  ];
+
+  // Languages data
   const languages = [
+    {
+      language: "Tagalog",
+      level: "N",
+      certification: "Native Proficiency",
+    },
     {
       language: "English",
       level: "C2",
       certification: "Bilingual Proficiency",
-    },
-    {
-      language: "Tagalog",
-      level: "C2",
-      certification: "Native Proficiency",
     },
     {
       language: "Japanese",
@@ -92,6 +375,7 @@ const Skills = () => {
     },
   ];
 
+  // 3D sphere setup
   useEffect(() => {
     // Current ref value
     const currentRef = mountRef.current;
@@ -121,52 +405,6 @@ const Skills = () => {
     controls.dampingFactor = 0.05;
     controls.enableZoom = false; // Disable zoom
     controls.enablePan = false; // Disable panning for more integration
-
-    // Define categories and skills (Only technical skills)
-    const skillsData = [
-      {
-        category: "Programming Languages",
-        skills: ["JavaScript", "TypeScript", "C#", "Python", "PHP"],
-      },
-      {
-        category: "Web Technologies",
-        skills: ["HTML5", "CSS3", "styled components", "Tailwind CSS"],
-      },
-      {
-        category: "Frameworks & Libraries",
-        skills: [
-          "React",
-          "Vue.js",
-          "Node.js",
-          "Unity3D",
-          "Express.js",
-          "jQuery",
-        ],
-      },
-      {
-        category: "Development Tools",
-        skills: [
-          "Git/GitHub",
-          "Vite on Vercel",
-          "Webpack",
-          "API Design",
-          "WebSocket",
-          "Axios",
-          "WordPress",
-        ],
-      },
-      {
-        category: "Design Tools",
-        skills: [
-          "Figma",
-          "Lightroom",
-          "Photoshop",
-          "After Effects",
-          "LottieFiles",
-          "Premiere Pro",
-        ],
-      },
-    ];
 
     // Create a 3D shape - Using Dodecahedron (12 faces) instead for fewer vertices to reduce overlap
     const geometry = new THREE.DodecahedronGeometry(10, 0);
@@ -238,7 +476,7 @@ const Skills = () => {
     const vertices = Array.from(verticesMap.values());
 
     // Prepare skill list (flattened)
-    const allSkills = skillsData.flatMap((category) =>
+    const allSkills = skillCategories.flatMap((category) =>
       category.skills.map((skill) => ({
         category: category.category,
         name: skill,
@@ -352,6 +590,8 @@ const Skills = () => {
         "Frameworks & Libraries": 0x4d4dff, // Blue
         "Development Tools": 0xffff4d, // Yellow
         "Design Tools": 0xff4dff, // Pink
+        "Platforms & Runtimes": 0xb04dff, // Purple
+        "Deployment Platforms": 0xff8c4d, // Orange
       };
 
       return colorMap[category] || 0xffffff;
@@ -448,6 +688,27 @@ const Skills = () => {
     };
   }, []);
 
+  // View tab effects
+  const handleTabChange = (tab) => {
+    setActiveView(tab);
+    setSelectedCategory(null);
+  };
+
+  // Get all skills flattened as badges
+  const getAllSkillBadges = () => {
+    // Flatten all skills
+    const allSkills = skillCategories.flatMap((category) =>
+      category.skills.map((skill) => ({
+        name: skill,
+        category: category.category,
+        color: category.color,
+        icon: null,
+      }))
+    );
+
+    return allSkills;
+  };
+
   return (
     <section id="skills" className="py-8">
       <motion.div
@@ -484,10 +745,7 @@ const Skills = () => {
         </p>
       </motion.div>
 
-      {/* 3D Technical Skills Visualization */}
-
-      {/* Main skills container - Two column layout for larger screens */}
-      {/* Main skills container - Two column layout for larger screens */}
+      {/* Main layout container */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - 3D Technical Skills Visualization */}
         <motion.div
@@ -503,211 +761,293 @@ const Skills = () => {
           />
         </motion.div>
 
-        {/* Right Column - Technical Skills, Languages and Additional Skills combined */}
+        {/* Right Column - Revamped Skills Display */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           className="lg:col-span-1"
         >
-          <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-lg p-6 border border-blue-900/50 overflow-hidden h-full">
+          <div className="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm rounded-xl p-6 border border-blue-900/50 overflow-hidden h-full">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -mr-16 -mt-16 blur-xl"></div>
             <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/10 rounded-full -ml-12 -mb-12 blur-xl"></div>
 
-            {/* Technical Skills Section */}
-            <div className="mb-8">
-              <div className="flex items-center mb-6">
-                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-blue-300">
-                  Technical Skills
-                </h3>
-              </div>
-
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-red-500 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-red-400">
-                      Programming Languages:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      JavaScript, TypeScript, C#, Python, PHP
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-500 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-green-400">
-                      Web Technologies:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      HTML5, CSS3, styled-components, Tailwind CSS, Canvas API
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-blue-400">
-                      Frameworks & Libraries:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      React, Vue.js, Express.js, Lottie, Three.js, jQuery
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-500 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-purple-400">
-                      Platforms & Runtimes:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      Node.js, WordPress, Unity3D
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-yellow-300 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-yellow-300">
-                      Development Tools:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      Git/GitHub, Vite, Webpack, json-server, Axios, WebSocket,
-                      API Design
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-orange-400 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-orange-400">
-                      Deployment Platforms:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      Vercel, Netlify, Microsoft IIS, Heroku
-                    </span>
-                  </div>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-pink-400 mr-2">❖</span>
-                  <div>
-                    <span className="font-bold text-pink-400">
-                      Design Tools:
-                    </span>
-                    <span className="text-slate-300">
-                      {" "}
-                      Figma, Lightroom, Photoshop, After Effects, LottieFiles,
-                      Premiere Pro
-                    </span>
-                  </div>
-                </li>
-              </ul>
+            {/* Tab Navigation */}
+            <div className="flex space-x-1 mb-6 bg-slate-900/70 p-1 rounded-lg">
+              <motion.button
+                className={`flex-1 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors ${
+                  activeView === "categories"
+                    ? "bg-blue-600 text-white"
+                    : "bg-transparent text-slate-400 hover:text-slate-300"
+                }`}
+                onClick={() => handleTabChange("categories")}
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+              >
+                Skill Categories
+              </motion.button>
+              <motion.button
+                className={`flex-1 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors ${
+                  activeView === "all-skills"
+                    ? "bg-blue-600 text-white"
+                    : "bg-transparent text-slate-400 hover:text-slate-300"
+                }`}
+                onClick={() => handleTabChange("all-skills")}
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+              >
+                All Skills
+              </motion.button>
+              <motion.button
+                className={`flex-1 py-2 text-sm font-medium rounded-md cursor-pointer transition-colors ${
+                  activeView === "languages"
+                    ? "bg-blue-600 text-white"
+                    : "bg-transparent text-slate-400 hover:text-slate-300"
+                }`}
+                onClick={() => handleTabChange("languages")}
+                whileHover={{ y: -1 }}
+                whileTap={{ y: 0 }}
+              >
+                Languages
+              </motion.button>
             </div>
 
-            {/* Additional Skills Section - Compact version */}
-            <div className="mb-8">
-              <div className="flex items-center mb-4">
-                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-blue-300">
-                  Additional Skills
-                </h3>
-              </div>
-              <div className="text-slate-300 flex flex-wrap gap-2">
-                {additionalSkills.map((skill, index) => {
-                  // Extract just the skill name (before the colon)
-                  const skillName = skill.split(":")[0];
-                  return (
-                    <React.Fragment key={index}>
-                      <span className="inline-block bg-slate-700/50 px-3 py-1 rounded-full text-sm">
-                        {skillName}
-                      </span>
-                    </React.Fragment>
-                  );
-                })}
-              </div>
-            </div>
+            {/* Tab Content */}
+            <AnimatePresence mode="wait">
+              {/* Categories View */}
+              {activeView === "categories" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  key="categories-view"
+                  className="space-y-4"
+                >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {skillCategories.map((category) => (
+                      <SkillCategoryCard
+                        key={category.id}
+                        category={category.category}
+                        icon={category.icon}
+                        color={category.color}
+                        skills={category.skills}
+                        isSelected={selectedCategory === category.category}
+                        onSelect={setSelectedCategory}
+                      />
+                    ))}
+                  </div>
 
-            {/* Languages Section */}
-            <div>
-              <div className="flex items-center mb-6">
-                <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 text-blue-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-bold text-blue-300">Languages</h3>
-              </div>
+                  {/* Additional Skills Section */}
+                  <div className="mt-6">
+                    <div className="flex items-center mb-4">
+                      <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-6 w-6 text-blue-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                          />
+                        </svg>
+                      </div>
+                      <h3 className="text-lg font-bold text-blue-300">
+                        Additional Skills
+                      </h3>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {additionalSkills.map((skill, index) => (
+                        <motion.span
+                          key={index}
+                          className="inline-block bg-slate-700/50 text-slate-300 px-3 py-1 rounded-full text-sm border border-slate-600 hover:border-blue-500/30 hover:bg-slate-700/80 transition-colors"
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.05 }}
+                          whileHover={{ y: -2 }}
+                        >
+                          {skill}
+                        </motion.span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
 
-              {/* Languages grid - responsive layout */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {languages.map((lang, index) => (
-                  <LanguageCard
-                    key={index}
-                    language={lang.language}
-                    level={lang.level}
-                    certification={lang.certification}
-                  />
-                ))}
-              </div>
-            </div>
+              {/* All Skills View */}
+              {activeView === "all-skills" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  key="all-skills-view"
+                >
+                  {/* Search/Filter */}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {skillCategories.map((category) => (
+                        <motion.button
+                          key={category.id}
+                          className={`px-3 py-1 rounded-full text-sm ${
+                            selectedCategory === category.category
+                              ? `bg-${category.color}-500/20 text-${category.color}-400 border border-${category.color}-500/30`
+                              : "bg-slate-800 text-slate-400 border border-slate-700 hover:border-slate-600 cursor-pointer"
+                          }`}
+                          onClick={() =>
+                            setSelectedCategory(
+                              selectedCategory === category.category
+                                ? null
+                                : category.category
+                            )
+                          }
+                          whileHover={{ y: -2 }}
+                          whileTap={{ y: 0 }}
+                        >
+                          {category.category}
+                        </motion.button>
+                      ))}
+                      {selectedCategory && (
+                        <motion.button
+                          className="px-3 py-1 rounded-full text-sm bg-slate-800 text-slate-400 border border-slate-700 cursor-pointer"
+                          onClick={() => setSelectedCategory(null)}
+                          whileHover={{ y: -2 }}
+                          whileTap={{ y: 0 }}
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                        >
+                          Clear Filter
+                        </motion.button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Skills Grid */}
+                  <div className="flex flex-wrap gap-2">
+                    {getAllSkillBadges()
+                      .filter(
+                        (skill) =>
+                          !selectedCategory ||
+                          skill.category === selectedCategory
+                      )
+                      .map((skill, index) => {
+                        // Find the category object for this skill to get the icon
+                        const category = skillCategories.find(
+                          (cat) => cat.category === skill.category
+                        );
+                        return (
+                          <SkillBadge
+                            key={skill.name}
+                            name={skill.name}
+                            color={skill.color || category?.color || "blue"}
+                            icon={category?.icon}
+                            category={skill.category}
+                            onClick={(name, cat) =>
+                              setSelectedSkill(
+                                selectedSkill === name ? null : name
+                              )
+                            }
+                            isActive={selectedSkill === skill.name}
+                          />
+                        );
+                      })}
+                  </div>
+                </motion.div>
+              )}
+
+              {/* Languages View */}
+              {activeView === "languages" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  key="languages-view"
+                >
+                  <div className="flex items-center mb-6">
+                    <div className="bg-blue-500/20 p-2 rounded-lg mr-4">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-6 w-6 text-blue-400"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                        />
+                      </svg>
+                    </div>
+                    <h3 className="text-xl font-bold text-blue-300">
+                      Languages
+                    </h3>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {languages.map((lang, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                      >
+                        <LanguageCard
+                          language={lang.language}
+                          level={lang.level}
+                          certification={lang.certification}
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* Language Proficiency Legend */}
+                  <div className="mt-8 p-4 bg-slate-800/60 rounded-lg border border-slate-700">
+                    <h4 className="text-sm font-medium text-blue-300 mb-3">
+                      Proficiency Legend
+                    </h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 text-xs">
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-700 mr-2"></div>
+                        <span className="text-slate-300">N: Native</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-600 mr-2"></div>
+                        <span className="text-slate-300">C2: Fluent</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-500 mr-2"></div>
+                        <span className="text-slate-300">C1: Advanced</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-400 mr-2"></div>
+                        <span className="text-slate-300">
+                          B2: Upper Intermediate
+                        </span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-300 mr-2"></div>
+                        <span className="text-slate-300">B1: Intermediate</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-200 mr-2"></div>
+                        <span className="text-slate-300">A2: Basic</span>
+                      </div>
+                      <div className="flex items-center">
+                        <div className="w-3 h-3 rounded-full bg-blue-100 mr-2"></div>
+                        <span className="text-slate-300">A1: Elementary</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
