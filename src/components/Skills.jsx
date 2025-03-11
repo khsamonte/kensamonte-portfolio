@@ -99,15 +99,15 @@ const SkillCategoryCard = ({
 }) => {
   return (
     <motion.div
-      className={`rounded-xl overflow-hidden transition-all duration-300 cursor-pointer ${
+      className={`rounded-xl overflow-hidden transition-all duration-0 cursor-pointer ${
         isSelected
           ? "border-2 border-" +
             color +
             "-500 bg-gradient-to-br from-slate-800 to-slate-900"
           : "border border-slate-700 bg-slate-800/40 hover:bg-slate-800/70"
       }`}
-      whileHover={{ y: -5 }}
-      whileTap={{ y: -2 }}
+      // whileHover={{ y: -5 }}
+      // whileTap={{ y: -2 }}
       onClick={() => onSelect(category)}
       layout
     >
